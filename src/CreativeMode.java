@@ -59,7 +59,6 @@ public interface CreativeMode {
 
     static void seelists() {
         System.out.println("\n\n\n\n");
-        if (lists.size() > 1) {
             for (int i = 0; i < lists.size(); i++) {
                 if (lists.get(i).list.size() > 0) {
                     for (int j = 0; j < lists.get(i).list.size(); j++) {
@@ -74,9 +73,7 @@ public interface CreativeMode {
                 }
                 System.out.println("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t ----------------------------------------------------------------------------------");
             }
-        } else {
-            System.out.println("No lists created");
-        }
+
     }
 
     static void createList() {

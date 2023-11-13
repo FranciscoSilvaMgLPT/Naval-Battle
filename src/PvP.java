@@ -11,6 +11,7 @@ public interface PvP {
     }
 
    static  void game(String player1, String player2) {
+       CreativeMode.seelists();
 
     }
 }
