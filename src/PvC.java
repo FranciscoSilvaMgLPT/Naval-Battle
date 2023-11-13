@@ -1,6 +1,6 @@
 public interface PvC {
 
-    public static void start(){
-
+    static void start(){
+        System.out.println("Player vs Computer");
     }
 }
