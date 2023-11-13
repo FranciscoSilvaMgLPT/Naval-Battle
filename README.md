@@ -5,7 +5,7 @@ PvP -> Player vs Player  (Tiago)<br>
 PvC -> Player vs Computer  (Ricardo)<br>
 Creative -> Create personalized boats   (Francisco)<br>
 
-##Classes
+## Classes
 Classe Boat:
     String name;
     int size;
