@@ -1,10 +1,11 @@
 # Naval-Battle
 
-Este jogo consiste em 3 modos
-PvP -> Player vs Player  (Tiago)
-PvC -> Player vs Computer  (Ricardo)
-Creative -> Create personalized boats   (Francisco)
+Este jogo consiste em 3 modos <br>
+PvP -> Player vs Player  (Tiago)<br>
+PvC -> Player vs Computer  (Ricardo)<br>
+Creative -> Create personalized boats   (Francisco)<br>
 
+##Classes
 Classe Boat:
     String name;
     int size;
