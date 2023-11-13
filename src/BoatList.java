@@ -2,7 +2,7 @@ import Boats.Boat;
 import java.util.ArrayList;
 
 public class BoatList {
-    ArrayList<Boat> list;
+    static ArrayList<Boat> list;
     String name;
 
     public BoatList(String name) {
