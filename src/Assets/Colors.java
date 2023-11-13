@@ -1,3 +1,5 @@
+package Assets;
+
 public class Colors {
     public static final String RESET = "\u001b[0m";
     public static final String BLACK = "\u001b[30m";

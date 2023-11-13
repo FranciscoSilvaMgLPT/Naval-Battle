@@ -10,4 +10,9 @@ public class PositionField {
         this.boat=null;
         this.hit=false;
     }
+
+    public void insertBoat(Boat boat){
+        this.field=boat.getSymbol();
+        this.boat=boat;
+    }
 }

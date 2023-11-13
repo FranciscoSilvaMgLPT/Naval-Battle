@@ -1,7 +1,6 @@
-import Boats.BigBoat;
-import Boats.Boat;
-import Boats.MediumBoat;
-import Boats.SmallBoat;
+import Assets.Colors;
+import Assets.Logo;
+import Boats.*;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -18,12 +17,8 @@ public class NavalBattle {
 
     public static void start() throws InterruptedException, IOException {
 
-        SmallBoat smallBoat = new SmallBoat();
-        MediumBoat mediumBoat = new MediumBoat();
-        BigBoat bigBoat = new BigBoat();
-        ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(smallBoat,mediumBoat,bigBoat));
-        new BoatList(classic,Colors.CYAN+"Classic"+Colors.RESET);
-
+        ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(),new MediumBoat(),new BigBoat()));
+        new BoatList(classic, Colors.CYAN+"Classic"+Colors.RESET);
 
         System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
         Thread.sleep(1000);
@@ -32,7 +27,7 @@ public class NavalBattle {
         System.out.println(" !"+Colors.RESET);
         Thread.sleep(1000);
         try {
-           // Logo.logoCinematic();
+          // Logo.logoCinematic();
             menu();
         } catch (Exception e) {
             System.out.println("AHM?");
@@ -93,6 +88,10 @@ public class NavalBattle {
                     System.out.print("\nP2 name:");
                     player2 = sc.nextLine();
                     PvP.start(true,player1,player2);
+
+
+
+
 
                 } catch (Exception e) {
                     System.out.println("AHM?");

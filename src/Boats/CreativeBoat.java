@@ -3,7 +3,7 @@ package Boats;
 public class CreativeBoat extends Boat{
 
 
-    public CreativeBoat(String name, int size, String symbol) {
+    public CreativeBoat(String name, int size,  String symbol) {
         super(name, size, symbol);
     }
 

@@ -1,3 +1,4 @@
+import Assets.Colors;
 import Boats.Boat;
 import Boats.CreativeBoat;
 
