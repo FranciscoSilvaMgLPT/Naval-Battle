@@ -10,8 +10,7 @@ import java.util.Scanner;
 
 public class NavalBattle {
     static int option = -10;
-    static String player1;
-    static String player2;
+    static String player1,player2;
     static Scanner sc = new Scanner(System.in);
 
     static PositionField[][] positions = new PositionField[9][9];
@@ -33,7 +32,7 @@ public class NavalBattle {
         System.out.println(" !"+Colors.RESET);
         Thread.sleep(1000);
         try {
-            Logo.logoCinematic();
+           // Logo.logoCinematic();
             menu();
         } catch (Exception e) {
             System.out.println("AHM?");
@@ -45,7 +44,7 @@ public class NavalBattle {
     public static void menu() throws InterruptedException, IOException {
 
         while (option != 0) {
-            Thread.sleep(1500);
+           Thread.sleep(1500);
             System.out.print(
                     "\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    1-Play\n" +
                             "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    0-Exit\n\n" +
@@ -82,12 +81,23 @@ public class NavalBattle {
         switch (option) {
             case 1:
                 try {
-                    pvp();
-                    PvP.start();
+                    Scanner sc = new Scanner(System.in);
+                    String player1;
+                    String player2;
+                    System.out.print(
+                            "🛳️ Naval battle! 🛳\n\n" +
+                                    "Insert names.\n" +
+                                    "P1 name:");
+
+                    player1 = sc.nextLine();
+                    System.out.print("\nP2 name:");
+                    player2 = sc.nextLine();
+                    PvP.start(true,player1,player2);
+
                 } catch (Exception e) {
                     System.out.println("AHM?");
                     sc.nextLine();
-                    PvP.start();
+
                 }
                 break;
             case 2:
@@ -117,18 +127,6 @@ public class NavalBattle {
         }
     }
 
-    public static void pvp() {
-        System.out.print(
-                "🛳️ Naval battle! 🛳\n\n" +
-                        "Insert names.\n" +
-                        "P1 name:");
-        sc.nextLine();
-        player1 = sc.nextLine();
-        System.out.print("\nP2 name:");
-        player2 = sc.nextLine();
-        game(true, player1, player2);
-    }
-
     public static void pvc() {
         System.out.print(
                 "🛳️ Naval battle! 🛳\n\n" +
@@ -137,18 +135,10 @@ public class NavalBattle {
         sc.nextLine();
         player1 = sc.nextLine();
         player2 = "CPU";
-        game(false, player1, player2);
+
     }
 
-    public static void game(boolean pvp, String player1, String player2) {
-        if (pvp) {
-            board();
 
-        } else {
-            //  player2 = "CPU";
-            board();
-        }
-    }
 
     public static void fillBoard() {
         for (int x = 0; x < 9; x++) {
@@ -159,7 +149,7 @@ public class NavalBattle {
         }
     }
 
-    public static void board() {
+    public static void board(String player1, String player2) {
         System.out.println("                       " + Colors.BLUE + player1 + " TERRITORY" + Colors.RESET + "                                                                                                                  " + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y                                                                                                                                Y        \n" +
                 "            ⬇️                                                                                                                               ⬇️\n" +
