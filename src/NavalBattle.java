@@ -1,5 +1,4 @@
 import Assets.Colors;
-import Assets.Logo;
 import Boats.*;
 
 import java.io.IOException;
@@ -26,15 +25,12 @@ public class NavalBattle {
         Thread.sleep(1000);
         System.out.println(" !"+Colors.RESET);
         Thread.sleep(1000);
-        try {
+
           // Logo.logoCinematic();
             menu();
-        } catch (Exception e) {
-            System.out.println("AHM?");
-            sc.nextLine();
-            menu();
+
         }
-    }
+
 
     public static void menu() throws InterruptedException, IOException {
 
@@ -47,13 +43,7 @@ public class NavalBattle {
             option = sc.nextInt();
             switch (option) {
                 case 1:
-                    try {
                         play();
-                    } catch (Exception e) {
-                        System.out.println("AHM?");
-                        sc.nextLine();
-                        menu();
-                    }
                     break;
                 case 0:
                     System.out.println("Adios!");
@@ -75,7 +65,6 @@ public class NavalBattle {
         option = sc.nextInt();
         switch (option) {
             case 1:
-                try {
                     Scanner sc = new Scanner(System.in);
                     String player1;
                     String player2;
@@ -87,36 +76,15 @@ public class NavalBattle {
                     player1 = sc.nextLine();
                     System.out.print("\nP2 name:");
                     player2 = sc.nextLine();
-                    PvP.start(true,player1,player2);
+                    PvP.start(true, player1, player2);
 
-
-
-
-
-                } catch (Exception e) {
-                    System.out.println("AHM?");
-                    sc.nextLine();
-
-                }
                 break;
             case 2:
-                try {
                     pvc();
                     PvC.start();
-                } catch (Exception e) {
-                    System.out.println("AHM?");
-                    sc.nextLine();
-                    PvC.start();
-                }
                 break;
             case 3:
-                try {
                     CreativeMode.start();
-                } catch (Exception e) {
-                    System.out.println("AHM?");
-                    sc.nextLine();
-                    CreativeMode.start();
-                }
                 break;
             case 0:
                 menu();
@@ -143,6 +111,8 @@ public class NavalBattle {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 positions[x][y] = new PositionField();
+                positions[x][y] = new PositionField();
+                positions1[x][y] = new PositionField();
                 positions1[x][y] = new PositionField();
             }
         }
@@ -152,7 +122,7 @@ public class NavalBattle {
         System.out.println("                       " + Colors.BLUE + player1 + " TERRITORY" + Colors.RESET + "                                                                                                                  " + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y                                                                                                                                Y        \n" +
                 "            ⬇️                                                                                                                               ⬇️\n" +
-                "        X ➡️  | A | B | C | D | E | F | G | H | I |                                                                                      X ➡️  | A | B | C | D | E | F | G | H | I |\n" +
+                "        X ➡️  | 🅐 | B | C | D | E | F | G | H | I |                                                                                      X ➡️  | A | B | C | D | E | F | G | H | I |\n" +
                 "            1 | " + positions[0][0].field + "| " + positions[0][1].field + "| " + positions[0][2].field + "| " + positions[0][3].field + "| " + positions[0][4].field + "| " + positions[0][5].field + "| " + positions[0][6].field + "| " + positions[0][7].field + "| " + positions[0][8].field + "|                                                                                          1 | " + positions1[0][0].field + "| " + positions1[0][1].field + "| " + positions1[0][2].field + "| " + positions1[0][3].field + "| " + positions1[0][4].field + "| " + positions1[0][5].field + "| " + positions1[0][6].field + "| " + positions1[0][7].field + "| " + positions1[0][8].field + "|\n" +
                 "            2 | " + positions[1][0].field + "| " + positions[1][1].field + "| " + positions[1][2].field + "| " + positions[1][3].field + "| " + positions[1][4].field + "| " + positions[1][5].field + "| " + positions[1][6].field + "| " + positions[1][7].field + "| " + positions[1][8].field + "|                                                                                          2 | " + positions1[1][0].field + "| " + positions1[1][1].field + "| " + positions1[1][2].field + "| " + positions1[1][3].field + "| " + positions1[1][4].field + "| " + positions1[1][5].field + "| " + positions1[1][6].field + "| " + positions1[1][7].field + "| " + positions1[1][8].field + "|\n" +
                 "            3 | " + positions[2][0].field + "| " + positions[2][1].field + "| " + positions[2][2].field + "| " + positions[2][3].field + "| " + positions[2][4].field + "| " + positions[2][5].field + "| " + positions[2][6].field + "| " + positions[2][7].field + "| " + positions[2][8].field + "|                                                                                          3 | " + positions1[2][0].field + "| " + positions1[2][1].field + "| " + positions1[2][2].field + "| " + positions1[2][3].field + "| " + positions1[2][4].field + "| " + positions1[2][5].field + "| " + positions1[2][6].field + "| " + positions1[2][7].field + "| " + positions1[2][8].field + "|\n" +
@@ -164,6 +134,23 @@ public class NavalBattle {
                 "            9 | " + positions[8][0].field + "| " + positions[8][1].field + "| " + positions[8][2].field + "| " + positions[8][3].field + "| " + positions[8][4].field + "| " + positions[8][5].field + "| " + positions[8][6].field + "| " + positions[8][7].field + "| " + positions[8][8].field + "|                                                                                          9 | " + positions1[8][0].field + "| " + positions1[8][1].field + "| " + positions1[8][2].field + "| " + positions1[8][3].field + "| " + positions1[8][4].field + "| " + positions1[8][5].field + "| " + positions1[8][6].field + "| " + positions1[8][7].field + "| " + positions1[8][8].field + "|");
 
     }
+    public static void board2(String player1, String player2) {
+        System.out.println("                       " + Colors.BLUE + player2 + " TERRITORY" + Colors.RESET + "                                                                                                                  " + Colors.RED + player1 + " TERRITORY" + Colors.RESET + "\n" +
+                "            Y                                                                                                                                Y        \n" +
+                "            ⬇️                                                                                                                               ⬇️\n" +
+                "        X ➡️  | 🅐| B | C | D | E | F | G | H | I |                                                                                      X ➡️  | A | B | C | D | E | F | G | H | I |\n" +
+                "            1 | " + positions1[0][0].field + "| " + positions1[0][1].field + "| " + positions1[0][2].field + "| " + positions1[0][3].field + "| " + positions1[0][4].field + "| " + positions1[0][5].field + "| " + positions1[0][6].field + "| " + positions1[0][7].field + "| " + positions1[0][8].field + "|                                                                                          1 | " + positions[0][0].field + "| " + positions[0][1].field + "| " + positions[0][2].field + "| " + positions[0][3].field + "| " + positions[0][4].field + "| " + positions[0][5].field + "| " + positions[0][6].field + "| " + positions[0][7].field + "| " + positions[0][8].field + "|\n" +
+                "            2 | " + positions1[1][0].field + "| " + positions1[1][1].field + "| " + positions1[1][2].field + "| " + positions1[1][3].field + "| " + positions1[1][4].field + "| " + positions1[1][5].field + "| " + positions1[1][6].field + "| " + positions1[1][7].field + "| " + positions1[1][8].field + "|                                                                                          2 | " + positions[1][0].field + "| " + positions[1][1].field + "| " + positions[1][2].field + "| " + positions[1][3].field + "| " + positions[1][4].field + "| " + positions[1][5].field + "| " + positions[1][6].field + "| " + positions[1][7].field + "| " + positions[1][8].field + "|\n" +
+                "            3 | " + positions1[2][0].field + "| " + positions1[2][1].field + "| " + positions1[2][2].field + "| " + positions1[2][3].field + "| " + positions1[2][4].field + "| " + positions1[2][5].field + "| " + positions1[2][6].field + "| " + positions1[2][7].field + "| " + positions1[2][8].field + "|                                                                                          3 | " + positions[2][0].field + "| " + positions[2][1].field + "| " + positions[2][2].field + "| " + positions[2][3].field + "| " + positions[2][4].field + "| " + positions[2][5].field + "| " + positions[2][6].field + "| " + positions[2][7].field + "| " + positions[2][8].field + "|\n" +
+                "            4 | " + positions1[3][0].field + "| " + positions1[3][1].field + "| " + positions1[3][2].field + "| " + positions1[3][3].field + "| " + positions1[3][4].field + "| " + positions1[3][5].field + "| " + positions1[3][6].field + "| " + positions1[3][7].field + "| " + positions1[3][8].field + "|                                                                                          4 | " + positions[3][0].field + "| " + positions[3][1].field + "| " + positions[3][2].field + "| " + positions[3][3].field + "| " + positions[3][4].field + "| " + positions[3][5].field + "| " + positions[3][6].field + "| " + positions[3][7].field + "| " + positions[3][8].field + "|\n" +
+                "            5 | " + positions1[4][0].field + "| " + positions1[4][1].field + "| " + positions1[4][2].field + "| " + positions1[4][3].field + "| " + positions1[4][4].field + "| " + positions1[4][5].field + "| " + positions1[4][6].field + "| " + positions1[4][7].field + "| " + positions1[4][8].field + "|                                                                                          5 | " + positions[4][0].field + "| " + positions[4][1].field + "| " + positions[4][2].field + "| " + positions[4][3].field + "| " + positions[4][4].field + "| " + positions[4][5].field + "| " + positions[4][6].field + "| " + positions[4][7].field + "| " + positions[4][8].field + "|\n" +
+                "            6 | " + positions1[5][0].field + "| " + positions1[5][1].field + "| " + positions1[5][2].field + "| " + positions1[5][3].field + "| " + positions1[5][4].field + "| " + positions1[5][5].field + "| " + positions1[5][6].field + "| " + positions1[5][7].field + "| " + positions1[5][8].field + "|                                                                                          6 | " + positions[5][0].field + "| " + positions[5][1].field + "| " + positions[5][2].field + "| " + positions[5][3].field + "| " + positions[5][4].field + "| " + positions[5][5].field + "| " + positions[5][6].field + "| " + positions[5][7].field + "| " + positions[5][8].field + "|\n" +
+                "            7 | " + positions1[6][0].field + "| " + positions1[6][1].field + "| " + positions1[6][2].field + "| " + positions1[6][3].field + "| " + positions1[6][4].field + "| " + positions1[6][5].field + "| " + positions1[6][6].field + "| " + positions1[6][7].field + "| " + positions1[6][8].field + "|                                                                                          7 | " + positions[6][0].field + "| " + positions[6][1].field + "| " + positions[6][2].field + "| " + positions[6][3].field + "| " + positions[6][4].field + "| " + positions[6][5].field + "| " + positions[6][6].field + "| " + positions[6][7].field + "| " + positions[6][8].field + "|\n" +
+                "            8 | " + positions1[7][0].field + "| " + positions1[7][1].field + "| " + positions1[7][2].field + "| " + positions1[7][3].field + "| " + positions1[7][4].field + "| " + positions1[7][5].field + "| " + positions1[7][6].field + "| " + positions1[7][7].field + "| " + positions1[7][8].field + "|                                                                                          8 | " + positions[7][0].field + "| " + positions[7][1].field + "| " + positions[7][2].field + "| " + positions[7][3].field + "| " + positions[7][4].field + "| " + positions[7][5].field + "| " + positions[7][6].field + "| " + positions[7][7].field + "| " + positions[7][8].field + "|\n" +
+                "            9 | " + positions1[8][0].field + "| " + positions1[8][1].field + "| " + positions1[8][2].field + "| " + positions1[8][3].field + "| " + positions1[8][4].field + "| " + positions1[8][5].field + "| " + positions1[8][6].field + "| " + positions1[8][7].field + "| " + positions1[8][8].field + "|                                                                                          9 | " + positions[8][0].field + "| " + positions[8][1].field + "| " + positions[8][2].field + "| " + positions[8][3].field + "| " + positions[8][4].field + "| " + positions[8][5].field + "| " + positions[8][6].field + "| " + positions[8][7].field + "| " + positions[8][8].field + "|");
+
+    }
+
 
 
 

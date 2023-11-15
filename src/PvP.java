@@ -30,10 +30,7 @@ public interface PvP {
 //enquanto player1 n posicioou os seus boats ira correr esse for, quando correr todos, ira passar pro player2;
 
 
-    NavalBattle.board(player1, player2);
     System.out.println("Positioning your Boats " + "" + player1);
-
-
 
     for (int i = 0; i <BoatList.list.size(); i++) {
 
@@ -54,10 +51,39 @@ public interface PvP {
         } else {
          //  NavalBattle.positions[newY - 1][newX].insertBoat(BoatList.list.get(i));
            // checkNullTemporary();
-            setDirectionOfBoatAndInsert(newY-1,newX,BoatList.list.get(i));
+            setDirectionOfBoatAndInsert1(newY-1,newX,BoatList.list.get(i));
 
         }
     }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("Positioning your Boats " + "" + player2);
+
+        NavalBattle.board2(player1,player2);
+        for (int i = 0; i <BoatList.list.size(); i++) {
+
+            System.out.println("Position boat: " + BoatList.list.get(i).getName());
+
+            System.out.println("Set the X: ");
+            String x = sc.next();
+            int newX = convertToLetter(x);
+
+            System.out.println("Set the Y: ");
+            int newY = sc.nextInt();
+
+            boolean existAnyBoat = NavalBattle.positions[newY - 1][newX].field.equals(BoatList.list.get(i).getSymbol());
+
+            if (existAnyBoat){
+                System.out.println("\n1 - You already have a boat in that position.");
+                break;
+            } else {
+                //  NavalBattle.positions[newY - 1][newX].insertBoat(BoatList.list.get(i));
+                // checkNullTemporary();
+                setDirectionOfBoatAndInsert2(newY-1,newX,BoatList.list.get(i));
+
+            }
+        }
+
+
     }
 
 
@@ -97,7 +123,7 @@ public interface PvP {
     }
 
 
-    private static void setDirectionOfBoatAndInsert(int y, int x , Boat boat) {
+    private static void setDirectionOfBoatAndInsert1(int y, int x , Boat boat) {
         System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
         String direction = sc.next().toLowerCase();
         switch (direction) {
@@ -107,19 +133,15 @@ public interface PvP {
                 boolean canInsertBoat = true;
                 while (numberOfPositionsW < boat.getSize()) {
                     if (NavalBattle.positions[y+1][x].boat == null) { // se e W fica
-                        //NavalBattle.positions[y][x].insertBoat(boat);
+                        NavalBattle.positions[y][x].insertBoat(boat);
                         y = y + 1;
                         numberOfPositionsW++;
                     }else {
                         System.out.println("You aready have boat");
-                         canInsertBoat = false;
                         break;
                     }
                 }
 
-                if (canInsertBoat){
-                    NavalBattle.positions[y][x].insertBoat(boat);
-                }
              // insertBoat(y,x,boat);
 
                 break;
@@ -128,17 +150,15 @@ public interface PvP {
                 int numberOfPositionsD = 0;
                 while (numberOfPositionsD < boat.getSize()) {
                     if (NavalBattle.positions[y][x+1].boat == null) {
-                      x = x + 1;
+                        NavalBattle.positions[y][x].insertBoat(boat);
+                         x = x + 1;
                         numberOfPositionsD++;
                     } else {
                         System.out.println("You aready have boat");
-                        canInsertBoat2 = false;
                         break;
                     }
                 }
-                if (canInsertBoat2){
-                    NavalBattle.positions[y][x].insertBoat(boat);
-                }
+
 
                 break;
             case "s":
@@ -146,6 +166,7 @@ public interface PvP {
                 boolean canInsertBoat3 = true;
                 while(numberOfPositionsS<boat.getSize()) {
                     if (NavalBattle.positions[y+1][x].boat == null) {
+                        NavalBattle.positions[y][x].insertBoat(boat);
                         y = y + 1;
                         numberOfPositionsS++;
                     } else{
@@ -154,26 +175,21 @@ public interface PvP {
                         break;
                     }
                 }
-                if (canInsertBoat3){
-                    NavalBattle.positions[y][x].insertBoat(boat);
-                }
+
                 break;
             case "a":
                 int numberOfPositionsA = 0;
                 boolean canInsertBoat4 = true;
                 while(numberOfPositionsA<boat.getSize()) {
                     if (NavalBattle.positions[y][x-1].boat == null) {
-
+                        NavalBattle.positions[y][x].insertBoat(boat);
                         x = x - 1;
                         numberOfPositionsA++;
                     } else{
                         System.out.println("You already have a boat");
-                        canInsertBoat4 = false;
+
                         break;
                     }
-                }
-                if (canInsertBoat4){
-                    NavalBattle.positions[y][x].insertBoat(boat);
                 }
                 break;
             default:
@@ -181,6 +197,79 @@ public interface PvP {
         }
     }
 
+    private static void setDirectionOfBoatAndInsert2(int y, int x , Boat boat) {
+        System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
+        String direction = sc.next().toLowerCase();
+        switch (direction) {
+
+            case "w":
+                int numberOfPositionsW = 0;
+                boolean canInsertBoat = true;
+                while (numberOfPositionsW < boat.getSize()) {
+                    if (NavalBattle.positions[y+1][x].boat == null) { // se e W fica
+                        NavalBattle.positions[y][x].insertBoat(boat);
+                        y = y + 1;
+                        numberOfPositionsW++;
+                    }else {
+                        System.out.println("You aready have boat");
+                        break;
+                    }
+                }
+
+                // insertBoat(y,x,boat);
+
+                break;
+            case "d":
+                boolean canInsertBoat2 = true;
+                int numberOfPositionsD = 0;
+                while (numberOfPositionsD < boat.getSize()) {
+                    if (NavalBattle.positions[y][x+1].boat == null) {
+                        NavalBattle.positions[y][x].insertBoat(boat);
+                        x = x + 1;
+                        numberOfPositionsD++;
+                    } else {
+                        System.out.println("You aready have boat");
+                        break;
+                    }
+                }
+
+
+                break;
+            case "s":
+                int numberOfPositionsS = 0;
+                boolean canInsertBoat3 = true;
+                while(numberOfPositionsS<boat.getSize()) {
+                    if (NavalBattle.positions[y+1][x].boat == null) {
+                        NavalBattle.positions[y][x].insertBoat(boat);
+                        y = y + 1;
+                        numberOfPositionsS++;
+                    } else{
+                        System.out.println("You already have a boat");
+                        canInsertBoat3 = false;
+                        break;
+                    }
+                }
+
+                break;
+            case "a":
+                int numberOfPositionsA = 0;
+                boolean canInsertBoat4 = true;
+                while(numberOfPositionsA<boat.getSize()) {
+                    if (NavalBattle.positions[y][x-1].boat == null) {
+                        NavalBattle.positions[y][x].insertBoat(boat);
+                        x = x - 1;
+                        numberOfPositionsA++;
+                    } else{
+                        System.out.println("You already have a boat");
+
+                        break;
+                    }
+                }
+                break;
+            default:
+                System.out.println("Invalid direction");
+        }
+    }
 
     static int convertToLetter(String letter) {
         switch (letter.toLowerCase()) {
