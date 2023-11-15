@@ -3,7 +3,6 @@ package Boats;
 public abstract class Boat {
     String name;
     int size;
-
     String symbol;
 
     public Boat(String name, int size,  String symbol) {
