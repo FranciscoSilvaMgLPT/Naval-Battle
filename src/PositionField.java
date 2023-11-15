@@ -11,6 +11,10 @@ public class PositionField {
         this.hit=false;
     }
 
+    public String getField() {
+        return field;
+    }
+
     public void insertBoat(Boat boat){
         this.field=boat.getSymbol();
         this.boat=boat;
