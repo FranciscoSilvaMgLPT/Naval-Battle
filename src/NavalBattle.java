@@ -1,4 +1,5 @@
 import Assets.Colors;
+import Assets.Logo;
 import Boats.*;
 
 import java.io.IOException;
@@ -26,7 +27,7 @@ public class NavalBattle {
         System.out.println(" !"+Colors.RESET);
         Thread.sleep(1000);
 
-          // Logo.logoCinematic();
+        //  Logo.logoCinematic();
             menu();
 
         }
@@ -161,6 +162,26 @@ public class NavalBattle {
             System.out.print((Colors.PURPLE+ (i + 1) +" |"+Colors.RESET));
             for (int j = 0; j < positions1[i].length; j++) {
                 System.out.print(positions1[i][j].field + "|");
+            }
+            System.out.println();
+        }
+    }
+
+    public static void printBothBoardsInvered(String player1, String player2) {
+        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+                "            Y                                                                                                                   Y\n" +
+                "            ⬇️                                                                                                                  ⬇️\n" +
+                "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |"+Colors.RESET + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
+
+        for (int i = 0; i < positions1.length; i++) {
+            System.out.print("            " +Colors.PURPLE+ (i + 1) +" |"+Colors.RESET);
+            for (int j = 0; j < positions1[i].length; j++) {
+                System.out.print(positions1[i][j].field + "|");
+            }
+            System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+            System.out.print((Colors.PURPLE+ (i + 1) +" |"+Colors.RESET));
+            for (int j = 0; j < positions[i].length; j++) {
+                System.out.print(positions[i][j].field + "|");
             }
             System.out.println();
         }

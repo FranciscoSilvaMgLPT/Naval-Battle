@@ -3,13 +3,13 @@ package Boats;
 public abstract class Boat {
     String name;
     int size;
+
     int life = size;
     String symbol;
 
     public Boat(String name, int size,  String symbol) {
         this.name = name;
         this.size = size;
-
         this.symbol = symbol;
     }
 
@@ -19,6 +19,13 @@ public abstract class Boat {
         return name;
     }
 
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
 
     public void setName(String name) {
         this.name = name;

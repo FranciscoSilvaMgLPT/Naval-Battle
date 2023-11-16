@@ -7,6 +7,10 @@ public class PositionField {
 
     Boat boat;
 
+    public void setField(String field) {
+        this.field = field;
+    }
+
     public PositionField() {
         this.boat=null;
         this.hit=false;

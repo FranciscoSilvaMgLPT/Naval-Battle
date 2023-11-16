@@ -1,5 +1,6 @@
 import Assets.Colors;
 import Boats.Boat;
+import com.sun.source.tree.WhileLoopTree;
 
 import java.util.Scanner;
 
@@ -11,9 +12,9 @@ public class PvP {
 
     BoatList boatlist = CreativeMode.lists.get(0);
 
-
     static void start(String player1, String player2) throws InterruptedException {
         positionBoats(player1,player2);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         attack(player1,player2);
 
 
@@ -34,7 +35,7 @@ public class PvP {
 
     }
 
-
+    //boolean boatExistsPlayer2 = existsBoat(NavalBattle.positions1,y ,newX);
     static void attack(String player1, String player2) throws InterruptedException {
         System.out.print(Colors.CYAN +"Get the cannons ready.");
         Thread.sleep(1000);
@@ -42,8 +43,83 @@ public class PvP {
         Thread.sleep(1000);
         System.out.print(Colors.CYAN +".🔥");
         Thread.sleep(1000);
-        displayBothBoards(player1,player2);
+
+        boolean allBoatsDead = true;
+
+        while (allBoatsDead) {
+
+            hideBoatsPlayers(player1, player2);
+            displayBothBoards(player1, player2);
+
+            player1Attack(player1);
+            displayBothBoards(player1, player2);
+
+            player2Attack(player2);
+            displayBothBoardsInverted(player2, player1);
+            allBoatsDead =false;
+        }
+
+
+
     }
+
+
+    static void player1Attack(String player){
+        System.out.println(Colors.CYAN + "Preparing barrels of " + player + "\n" +
+                "Choose the position you want and fire!");
+
+
+        System.out.print("Set the X: ");
+        String x = sc.next();
+
+        int newX = convertToLetter(x);
+        System.out.print("Set the Y: ");
+        int y = sc.nextInt();
+
+        boolean boatExistsPlayer1 = existsBoat(NavalBattle.positions,y, newX);
+
+        if(boatExistsPlayer1 && NavalBattle.positions[y][newX].getField().equals(" 🔥")){
+            System.out.println("You already shoot this boat... Try Again!");
+        } else if (boatExistsPlayer1 && NavalBattle.positions[y][newX].getField().equals(" ☠️")){
+            System.out.println("The boat is already down");
+        }
+
+        if(boatExistsPlayer1){
+            NavalBattle.positions[y][newX].field = " 🔥";
+
+        } else {
+            NavalBattle.positions[y][newX].field = " 💧";
+        }
+    }
+    static void player2Attack(String player){
+        System.out.println(Colors.CYAN + "Preparing barrels of " + player + "\n" +
+                "Choose the position you want and fire!");
+
+
+        System.out.print("Set the X: ");
+        String x = sc.next();
+
+        int newX = convertToLetter(x);
+        System.out.print("Set the Y: ");
+        int y = sc.nextInt();
+
+        boolean boatExistsPlayer1 = existsBoat(NavalBattle.positions1,y, newX);
+        if(boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" 🔥")){
+            System.out.println("You already shoot this boat... Try Again!");
+        } else if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" ☠️")){
+            System.out.println("The boat is already down");
+        }
+        if(boatExistsPlayer1){
+            NavalBattle.positions1[y][newX].field = " 🔥";
+
+        } else {
+            NavalBattle.positions1[y][newX].field = " 💧";
+        }
+    }
+
+
+
+
 
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
@@ -159,9 +235,7 @@ public class PvP {
 
     private static void player1SetBoat(String player) {
 
-
         for (int i = 0; i < BoatList.list.size(); i++) {
-            //  hideBoatsPlayer1();
             displayBoard1(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
             System.out.println("Set the X: ");
@@ -178,10 +252,7 @@ public class PvP {
 
     private static void player2SetBoat(String player) {
 
-
-
         for (int i = 0; i < BoatList.list.size(); i++) {
-            //hideBoatsPlayer2();
             displayBoard2(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
             System.out.println("Set the X: ");
@@ -280,31 +351,37 @@ public class PvP {
         NavalBattle.printPlayer2Board(player1);
     }
     private static void displayBothBoards(String player1, String player2){
+
         NavalBattle.printBothBoards(player1,player2);
     }
 
+    private static void displayBothBoardsInverted(String player1, String player2){
 
-    private static void hideBoatsPlayer1(){
+        NavalBattle.printBothBoardsInvered(player1,player2);
+    }
+
+
+    private static void hideBoatsPlayers(String player1,String player2){
         for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions[i].length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getBoat() != null && NavalBattle.positions[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
+                if (NavalBattle.positions[i][j].getBoat()!=null){
+                    NavalBattle.positions[i][j].setField(" ▪️");
                 }
             }
         }
-    }
-    private static void hideBoatsPlayer2(){
         for (int i = 0; i < NavalBattle.positions1.length; i++) {
             for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getBoat() != null && NavalBattle.positions1[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
+                if (NavalBattle.positions1[i][j].getBoat() !=null){
+                    NavalBattle.positions1[i][j].setField(" ▪️");
                 }
             }
         }
+
     }
+    static boolean existsBoat(PositionField[][] positions, int x, int y) {
+        return positions[x][y].boat != null;
+    }
+
+
 
 }

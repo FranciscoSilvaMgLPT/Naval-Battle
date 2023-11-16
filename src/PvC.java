@@ -206,18 +206,6 @@ public interface PvC {
 
     private static boolean player1SetBoat(String player1, String player2) {
 
-        /*for (int i = 0; i < NavalBattle.positions1.length; i++) {
-            for (int j = 0; j < NavalBattle.positions1.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
-        */
-
-
         CreativeMode.seelists();
         NavalBattle.printPlayer1Board(player1);
 
@@ -239,19 +227,6 @@ public interface PvC {
     }
 
     private static boolean player2SetBoat(String player1, String player2) {
-
-        /*
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-
-            }
-        }
-        */
 
         NavalBattle.printPlayer2Board(player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
