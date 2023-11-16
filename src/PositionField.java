@@ -1,7 +1,7 @@
 import Boats.Boat;
 
 public class PositionField {
-    String field = "  ";
+    String field = "⬛️";
     boolean hit;
 
     Boat boat;
@@ -9,6 +9,10 @@ public class PositionField {
     public PositionField() {
         this.boat=null;
         this.hit=false;
+    }
+
+    public String getField() {
+        return field;
     }
 
     public void insertBoat(Boat boat){
