@@ -66,6 +66,7 @@ public class NavalBattle {
                         "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0-Back\n" +
                         Colors.YELLOW + "Option:" + Colors.RESET);
         option = sc.nextInt();
+        sc.nextLine();
         switch (option) {
             case 1:
                     System.out.print(
@@ -76,7 +77,7 @@ public class NavalBattle {
                     player1 = sc.nextLine();
                     System.out.print("\nP2 name:");
                     player2 = sc.nextLine();
-                    PvP.start(true, player1, player2);
+                    PvP.start(player1, player2);
                 break;
             case 2:
                 player1 = "Player";

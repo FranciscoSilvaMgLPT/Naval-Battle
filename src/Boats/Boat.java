@@ -10,7 +10,6 @@ public abstract class Boat {
         this.name = name;
         this.size = size;
 
-
         this.symbol = symbol;
     }
 

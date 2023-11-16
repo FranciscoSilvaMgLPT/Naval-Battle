@@ -3,41 +3,48 @@ import Boats.Boat;
 
 import java.util.Scanner;
 
-public interface PvP {
 
-    Scanner sc = new Scanner(System.in);
+
+public class PvP {
+
+    static Scanner sc = new Scanner(System.in);
 
     BoatList boatlist = CreativeMode.lists.get(0);
 
 
-    static void start(boolean pvp, String player1, String player2) {
+    static void start(String player1, String player2) throws InterruptedException {
+        positionBoats(player1,player2);
+        attack(player1,player2);
 
-        positionBoats(player1, player2);
-        //NavalBattle.board(player1, player2);
-        game(player1, player2);
 
     }
 
 
-    static void game(String player1, String player2) {
-        CreativeMode.seelists();
-        positionBoats(player1, player2);
-    }
 
 
     static void positionBoats(String player1, String player2) {
-        System.out.println("Positioning your Boats " + "" + player1);
-        player1SetBoat(player1, player2);
 
+        System.out.println("Positioning your Boats " + "" + player1);
+        player1SetBoat(player1);
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         System.out.println("Positioning your Boats " + "" + player2);
-        player2SetBoat(player1, player2);
-    }
+        player2SetBoat(player2);
 
-    static void attack() {
 
     }
+
+
+    static void attack(String player1, String player2) throws InterruptedException {
+        System.out.print(Colors.CYAN +"Get the cannons ready.");
+        Thread.sleep(1000);
+        System.out.print(Colors.CYAN +".");
+        Thread.sleep(1000);
+        System.out.print(Colors.CYAN +".🔥");
+        Thread.sleep(1000);
+        displayBothBoards(player1,player2);
+    }
+
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
         int y = startY;
@@ -75,7 +82,6 @@ public interface PvP {
         }
         return true;
     }
-
     private static boolean canInsertBoatPlayer2(int startY, int startX, int size, String direction) {
         int y = startY;
         int x = startX;
@@ -115,15 +121,7 @@ public interface PvP {
 
     private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
         boolean successfullyInserted = false;
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
+
         while (!successfullyInserted) {
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
             String direction = sc.next().toLowerCase();
@@ -158,24 +156,14 @@ public interface PvP {
     }
 
 
-    private static void player1SetBoat(String player1, String player2) {
 
-        for (int i = 0; i < NavalBattle.positions1.length; i++) {
-            for (int j = 0; j < NavalBattle.positions1.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
+    private static void player1SetBoat(String player) {
 
-        //NavalBattle.print(player1, player2);
 
         for (int i = 0; i < BoatList.list.size(); i++) {
-
+            //  hideBoatsPlayer1();
+            displayBoard1(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
-
             System.out.println("Set the X: ");
             String x = sc.next();
             int newX = convertToLetter(x);
@@ -185,27 +173,17 @@ public interface PvP {
 
             setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
         }
+
     }
 
-    private static void player2SetBoat(String player1, String player2) {
+    private static void player2SetBoat(String player) {
 
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
 
-                    }
-                }
 
-            }
-        }
-
-        //NavalBattle.board2(player1, player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
-
+            //hideBoatsPlayer2();
+            displayBoard2(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
-
             System.out.println("Set the X: ");
             String x = sc.next();
             int newX = convertToLetter(x);
@@ -214,24 +192,16 @@ public interface PvP {
             int newY = sc.nextInt();
 
             setDirectionOfBoatAndInsert2(newY - 1, newX, BoatList.list.get(i));
-
         }
+
 
     }
 
 
-    private static void setDirectionOfBoatAndInsert2(int y, int x, Boat boat) {
+    private static void setDirectionOfBoatAndInsert2(int y, int x , Boat boat) {
         boolean successfullyInserted = false;
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
-        while (!successfullyInserted) {
+
+        while (!successfullyInserted){
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
             String direction = sc.next().toLowerCase();
             boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
@@ -292,13 +262,48 @@ public interface PvP {
     }
 
 
-    static void checkNullTemporary() {
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                System.out.println(NavalBattle.positions[i][j].boat);
+    static void checkNullTemporary(){
+        for (int i = 0; i <NavalBattle.positions1.length ; i++) {
+            for (int j = 0; j <NavalBattle.positions1.length ; j++) {
+                System.out.println(NavalBattle.positions1[i][j].boat);
 
             }
 
+        }
+    }
+    private static void displayBoard1(String player1) {
+
+        NavalBattle.printPlayer1Board(player1);
+    }
+    private static void displayBoard2(String player1) {
+
+        NavalBattle.printPlayer2Board(player1);
+    }
+    private static void displayBothBoards(String player1, String player2){
+        NavalBattle.printBothBoards(player1,player2);
+    }
+
+
+    private static void hideBoatsPlayer1(){
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
+            for (int j = 0; j < NavalBattle.positions[i].length; j++) {
+                for (int k = 0; k < BoatList.list.size(); k++) {
+                    if (NavalBattle.positions[i][j].getBoat() != null && NavalBattle.positions[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
+                        BoatList.list.get(k).setSymbol("⬛");
+                    }
+                }
+            }
+        }
+    }
+    private static void hideBoatsPlayer2(){
+        for (int i = 0; i < NavalBattle.positions1.length; i++) {
+            for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
+                for (int k = 0; k < BoatList.list.size(); k++) {
+                    if (NavalBattle.positions1[i][j].getBoat() != null && NavalBattle.positions1[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
+                        BoatList.list.get(k).setSymbol("⬛");
+                    }
+                }
+            }
         }
     }
 

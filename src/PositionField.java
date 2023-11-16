@@ -4,6 +4,7 @@ import Boats.Boat;
 public class PositionField {
     String field = " ▪️";
     boolean hit;
+
     Boat boat;
 
     public PositionField() {
@@ -13,6 +14,10 @@ public class PositionField {
 
     public String getField() {
         return field;
+    }
+
+    public Boat getBoat() {
+        return boat;
     }
 
     public void insertBoat(Boat boat){
