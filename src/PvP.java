@@ -13,7 +13,7 @@ public interface PvP {
     static void start(boolean pvp, String player1, String player2) {
 
         positionBoats(player1, player2);
-        NavalBattle.board(player1, player2);
+        //NavalBattle.board(player1, player2);
         game(player1, player2);
 
     }
@@ -33,14 +33,11 @@ public interface PvP {
 
         System.out.println("Positioning your Boats " + "" + player2);
         player2SetBoat(player1, player2);
-
     }
-
 
     static void attack() {
 
     }
-
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
         int y = startY;
@@ -78,6 +75,7 @@ public interface PvP {
         }
         return true;
     }
+
     private static boolean canInsertBoatPlayer2(int startY, int startX, int size, String direction) {
         int y = startY;
         int x = startX;
@@ -117,15 +115,13 @@ public interface PvP {
 
     private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
         boolean successfullyInserted = false;
-        for (int i = 0; i <NavalBattle.positions.length ; i++) {
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions.length; j++) {
                 for (int k = 0; k < BoatList.list.size(); k++) {
                     if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
                         BoatList.list.get(k).setSymbol("⬛");
-
                     }
                 }
-
             }
         }
         while (!successfullyInserted) {
@@ -162,43 +158,38 @@ public interface PvP {
     }
 
 
-
-    private static void player1SetBoat(String player1,String player2) {
-
+    private static void player1SetBoat(String player1, String player2) {
 
         for (int i = 0; i < NavalBattle.positions1.length; i++) {
             for (int j = 0; j < NavalBattle.positions1.length; j++) {
                 for (int k = 0; k < BoatList.list.size(); k++) {
                     if (NavalBattle.positions1[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
                         BoatList.list.get(k).setSymbol("⬛");
-
                     }
                 }
             }
         }
 
-            NavalBattle.board(player1, player2);
+        //NavalBattle.print(player1, player2);
 
-            for (int i = 0; i < BoatList.list.size(); i++) {
+        for (int i = 0; i < BoatList.list.size(); i++) {
 
-                System.out.println("Position boat: " + BoatList.list.get(i).getName());
+            System.out.println("Position boat: " + BoatList.list.get(i).getName());
 
-                System.out.println("Set the X: ");
-                String x = sc.next();
-                int newX = convertToLetter(x);
+            System.out.println("Set the X: ");
+            String x = sc.next();
+            int newX = convertToLetter(x);
 
-                System.out.println("Set the Y: ");
-                int newY = sc.nextInt();
+            System.out.println("Set the Y: ");
+            int newY = sc.nextInt();
 
-                setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
-
-            }
-
-
+            setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
+        }
     }
-    private static void player2SetBoat(String player1,String player2) {
 
-        for (int i = 0; i <NavalBattle.positions.length ; i++) {
+    private static void player2SetBoat(String player1, String player2) {
+
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions.length; j++) {
                 for (int k = 0; k < BoatList.list.size(); k++) {
                     if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
@@ -210,7 +201,7 @@ public interface PvP {
             }
         }
 
-        NavalBattle.board2(player1, player2);
+        //NavalBattle.board2(player1, player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
 
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
@@ -229,20 +220,18 @@ public interface PvP {
     }
 
 
-    private static void setDirectionOfBoatAndInsert2(int y, int x , Boat boat) {
+    private static void setDirectionOfBoatAndInsert2(int y, int x, Boat boat) {
         boolean successfullyInserted = false;
-        for (int i = 0; i <NavalBattle.positions.length ; i++) {
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions.length; j++) {
                 for (int k = 0; k < BoatList.list.size(); k++) {
                     if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
                         BoatList.list.get(k).setSymbol("⬛");
-
                     }
                 }
-
             }
         }
-        while (!successfullyInserted){
+        while (!successfullyInserted) {
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
             String direction = sc.next().toLowerCase();
             boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
@@ -303,9 +292,9 @@ public interface PvP {
     }
 
 
-    static void checkNullTemporary(){
-        for (int i = 0; i <NavalBattle.positions.length ; i++) {
-            for (int j = 0; j <NavalBattle.positions.length ; j++) {
+    static void checkNullTemporary() {
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
+            for (int j = 0; j < NavalBattle.positions.length; j++) {
                 System.out.println(NavalBattle.positions[i][j].boat);
 
             }

@@ -1,7 +1,7 @@
 import Boats.Boat;
 
 public class PositionField {
-    String field = "⬛️";
+    String field = "⃞";
     boolean hit;
 
     Boat boat;
