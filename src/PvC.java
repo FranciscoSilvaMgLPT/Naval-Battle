@@ -67,15 +67,15 @@ public interface PvC {
         boolean boatExistsPlayer2 = existsBoat(NavalBattle.positions1, position1, position2);
 
         if (boatExistsPlayer1) {
-            NavalBattle.positions[position1][position2].field = "☠️";
+            NavalBattle.positions[position1][position2].field = " ☠️";
         } else {
-            NavalBattle.positions[position1][position2].field = "💧";
+            NavalBattle.positions[position1][position2].field = " 💧";
         }
 
         if (boatExistsPlayer2) {
-            NavalBattle.positions1[position1][position2].field = "☠️";
+            NavalBattle.positions1[position1][position2].field = " ☠️";
         } else {
-            NavalBattle.positions1[position1][position2].field = "💧";
+            NavalBattle.positions1[position1][position2].field = " 💧";
         }
 
         NavalBattle.printBothBoards(player1,player2);
