@@ -119,49 +119,47 @@ public class NavalBattle {
     }
 
     public static void printPlayer1Board(String player1) {
-        System.out.println("                       " + Colors.BLUE + player1 + " TERRITORY" + Colors.RESET + "\n" +
+        System.out.print("                       " + Colors.BLUE + player1 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y\n" +
                 "            ⬇️\n" +
-                "        X ➡️  | 🅐 | B | C | D | E | F | G | H | I |\n");
-
+                "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
         for (int i = 0; i < positions.length; i++) {
-            System.out.print("            " + (i + 1) + " | ");
+            System.out.print("            " +Colors.PURPLE+ (i + 1) +" |"+Colors.RESET);
             for (int j = 0; j < positions[i].length; j++) {
-                System.out.print(positions[i][j].field + "| ");
+                System.out.print(positions[i][j].field + "|");
             }
             System.out.println();
         }
     }
 
     public static void printPlayer2Board(String player2) {
-        System.out.println("                       " + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+        System.out.print("                       " + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y\n" +
                 "            ⬇️\n" +
-                "        X ➡️  | 🅐 | 🅑 | 🅒 | 🅓 | 🅔 | 🅕 | 🅖 | 🅗 | 🅘 |\n");
-
+                "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
         for (int i = 0; i < positions1.length; i++) {
-            System.out.print("            " + (i + 1) + " | ");
+            System.out.print("            " +Colors.PURPLE+ (i + 1) +" |"+Colors.RESET);
             for (int j = 0; j < positions1[i].length; j++) {
-                System.out.print(positions1[i][j].field + "| ");
+                System.out.print(positions1[i][j].field + "|");
             }
             System.out.println();
         }
     }
     public static void printBothBoards(String player1, String player2) {
-        System.out.print("                       " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
-                "            Y                                                                                                                    Y\n" +
+        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+                "            Y                                                                                                                   Y\n" +
                 "            ⬇️                                                                                                                  ⬇️\n" +
-                "        X ➡️  | 𝔸 | 𝔹 | 𝔻 | 𝔻 | 𝔼 | 𝔽 | 𝔾 | 𝔻 | 𝕀 |" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️  | 🅐 | 🅑 | 🅒 | 🅓 | 🅔 | 🅕 | 🅖 | 🅗 | 🅘 |\n");
+                "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |"+Colors.RESET + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
 
         for (int i = 0; i < positions.length; i++) {
-            System.out.print("            " + (i + 1) + " | ");
+            System.out.print("            " +Colors.PURPLE+ (i + 1) +" |"+Colors.RESET);
             for (int j = 0; j < positions[i].length; j++) {
-                System.out.print(positions[i][j].field + " | ");
+                System.out.print(positions[i][j].field + "|");
             }
             System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
-            System.out.print((i + 1) + " | ");
+            System.out.print((Colors.PURPLE+ (i + 1) +" |"+Colors.RESET));
             for (int j = 0; j < positions1[i].length; j++) {
-                System.out.print(positions1[i][j].field + " | ");
+                System.out.print(positions1[i][j].field + "|");
             }
             System.out.println();
         }

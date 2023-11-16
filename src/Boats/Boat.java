@@ -3,6 +3,7 @@ package Boats;
 public abstract class Boat {
     String name;
     int size;
+    int life = size;
     String symbol;
 
     public Boat(String name, int size,  String symbol) {
@@ -12,6 +13,8 @@ public abstract class Boat {
 
         this.symbol = symbol;
     }
+
+
 
     public String getName() {
         return name;

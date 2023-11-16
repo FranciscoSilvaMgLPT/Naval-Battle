@@ -1,9 +1,9 @@
+import Assets.Colors;
 import Boats.Boat;
 
 public class PositionField {
-    String field = "⃞";
+    String field = " ▪️";
     boolean hit;
-
     Boat boat;
 
     public PositionField() {
@@ -19,4 +19,5 @@ public class PositionField {
         this.field=boat.getSymbol();
         this.boat=boat;
     }
+
 }
