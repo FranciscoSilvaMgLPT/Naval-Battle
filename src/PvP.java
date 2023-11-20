@@ -1,9 +1,6 @@
 import Assets.Colors;
 import Boats.Boat;
-
 import java.util.Scanner;
-
-
 
 public class PvP {
 
@@ -11,9 +8,9 @@ public class PvP {
 
     BoatList boatlist = CreativeMode.lists.get(0);
 
-
     static void start(String player1, String player2) throws InterruptedException {
         positionBoats(player1,player2);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         attack(player1,player2);
 
 
@@ -34,7 +31,7 @@ public class PvP {
 
     }
 
-
+    //boolean boatExistsPlayer2 = existsBoat(NavalBattle.positions1,y ,newX);
     static void attack(String player1, String player2) throws InterruptedException {
         System.out.print(Colors.CYAN +"Get the cannons ready.");
         Thread.sleep(1000);
@@ -42,8 +39,136 @@ public class PvP {
         Thread.sleep(1000);
         System.out.print(Colors.CYAN +".🔥");
         Thread.sleep(1000);
-        displayBothBoards(player1,player2);
+
+        hideBoatsPlayers(player1, player2);
+
+        while (!areAllBoatsDestroyedPlayer1() || !areAllBoatsDestroyedPlayer2()) {
+
+
+            displayBothBoards(player1, player2);
+
+            System.out.println(player1 +" turn");
+            player1Attack(player1);
+            displayBothBoards(player1, player2);
+
+            System.out.println(player2 +" turn");
+            player2Attack(player2);
+            displayBothBoardsInverted(player2, player1);
+
+        }
+
+
+
     }
+    static boolean areAllBoatsDestroyedPlayer1() {
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
+            for (int j = 0; j < NavalBattle.positions[i].length; j++) {
+                if (NavalBattle.positions[i][j] != null && NavalBattle.positions[i][j].field.equals(" 🔥")) {
+                    return false;
+                } else if (NavalBattle.positions[i][j] != null && NavalBattle.positions[i][j].field.equals(" ☠️")){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+    static boolean areAllBoatsDestroyedPlayer2() {
+        for (int i = 0; i < NavalBattle.positions1.length; i++) {
+            for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
+                if (NavalBattle.positions1[i][j] != null && NavalBattle.positions1[i][j].field.equals(" 🔥")) {
+                    return false;
+                }  else if (NavalBattle.positions1[i][j] != null && NavalBattle.positions1[i][j].field.equals(" ☠️")){
+                    return true;
+                }
+            }
+        }
+        return false;
+    }
+
+    static void player1Attack(String player) {
+        int y = 0;
+        int newX = 0;
+        int boatLifePlayer2 = 4;
+
+        while (boatLifePlayer2 > 0) {
+            System.out.print("Set the X: ");
+            String x = sc.next();
+            newX = convertToLetter(x);
+
+            System.out.print("Set the Y: ");
+            y = sc.nextInt();
+            boolean boatExistsPlayer1 = existsBoat(NavalBattle.positions1, y, newX);
+
+            boatLifePlayer2 = NavalBattle.positions1[y][newX].getBoat().getLife();
+
+            if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" 🔥")) {
+                System.out.println("You already shot this boat... Try Again!");
+            } else if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" ☠️")) {
+                System.out.println("The boat is already down");
+            }
+
+            if (boatExistsPlayer1) {
+                NavalBattle.positions1[y][newX].hit = true;
+                NavalBattle.positions1[y][newX].field = " 🔥";
+                int boatLife = NavalBattle.positions1[y][newX].getBoat().getLife();
+                boatLife--;
+
+                if (boatLife == 0) {
+                    System.out.println("You sunk a boat!");
+                    NavalBattle.positions1[y][newX].field = " ☠️";
+                }
+            } else {
+                System.out.println("Missed!");
+                NavalBattle.positions1[y][newX].setField(" 💧");
+            }
+        }
+
+    }
+
+
+
+    static void player2Attack(String player){
+        int y = 0;
+        int newX = 0;
+        int boatLifePlayer1 = 4;
+
+        while (boatLifePlayer1 > 0) {
+            System.out.print("Set the X: ");
+            String x = sc.next();
+            newX = convertToLetter(x);
+
+            System.out.print("Set the Y: ");
+            y = sc.nextInt();
+            boolean boatExistsPlayer = existsBoat(NavalBattle.positions, y, newX);
+
+            boatLifePlayer1 = NavalBattle.positions[y][newX].boat.getLife();
+
+            if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" 🔥")) {
+                System.out.println("You already shot this boat... Try Again!");
+            } else if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" ☠️")) {
+                System.out.println("The boat is already down");
+            }
+
+            if (boatExistsPlayer) {
+                NavalBattle.positions[y][newX].field = " 🔥";
+                boatLifePlayer1--;
+                if (boatLifePlayer1 ==  0) {
+                    NavalBattle.positions[y][newX].field = " ☠️";
+                }
+            } else {
+                System.out.println("Missed!");
+                NavalBattle.positions[y][newX] = new PositionField();
+                NavalBattle.positions[y][newX].field = " 💧";
+
+            }
+        }
+
+
+    }
+
+
+
+
 
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
@@ -159,9 +284,7 @@ public class PvP {
 
     private static void player1SetBoat(String player) {
 
-
         for (int i = 0; i < BoatList.list.size(); i++) {
-            //  hideBoatsPlayer1();
             displayBoard1(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
             System.out.println("Set the X: ");
@@ -178,10 +301,7 @@ public class PvP {
 
     private static void player2SetBoat(String player) {
 
-
-
         for (int i = 0; i < BoatList.list.size(); i++) {
-            //hideBoatsPlayer2();
             displayBoard2(player);
             System.out.println("Position boat: " + BoatList.list.get(i).getName());
             System.out.println("Set the X: ");
@@ -280,31 +400,36 @@ public class PvP {
         NavalBattle.printPlayer2Board(player1);
     }
     private static void displayBothBoards(String player1, String player2){
+
         NavalBattle.printBothBoards(player1,player2);
     }
 
+    private static void displayBothBoardsInverted(String player1, String player2){
+        NavalBattle.printBothBoardsInvered(player1,player2);
+    }
 
-    private static void hideBoatsPlayer1(){
+
+    private static void hideBoatsPlayers(String player1,String player2){
         for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions[i].length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getBoat() != null && NavalBattle.positions[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
+                if (NavalBattle.positions[i][j].getBoat()!=null){
+                    NavalBattle.positions[i][j].setField(" ▪️");
                 }
             }
         }
-    }
-    private static void hideBoatsPlayer2(){
         for (int i = 0; i < NavalBattle.positions1.length; i++) {
             for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getBoat() != null && NavalBattle.positions1[i][j].getBoat().getSymbol().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
+                if (NavalBattle.positions1[i][j].getBoat() !=null){
+                    NavalBattle.positions1[i][j].setField(" ▪️");
                 }
             }
         }
+
     }
+    static boolean existsBoat(PositionField[][] positions, int x, int y) {
+        return positions[x][y].boat != null;
+    }
+
+
 
 }
