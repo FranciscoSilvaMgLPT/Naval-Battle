@@ -74,6 +74,24 @@ public interface CreativeMode {
                 }
                 System.out.println("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t ----------------------------------------------------------------------------------");
             }
+    }
+
+    static void seeListsPvC() {
+        System.out.println("\n\n\n\n");
+        for (int i = 0; i < lists.size(); i++) {
+            if (lists.get(i).list.size() > 0) {
+                for (int j = 0; j < lists.get(i).list.size(); j++) {
+                    if (j == 0) {
+                        System.out.print(lists.get(i).name + " -> " + lists.get(i).list.get(j).getName() + ": " + lists.get(i).list.get(j).getSymbol().repeat(lists.get(i).list.get(j).getSize()));
+                    } else {
+                        System.out.print(" " + lists.get(i).list.get(j).getName() + ": " + lists.get(i).list.get(j).getSymbol().repeat(lists.get(i).list.get(j).getSize()));
+                    }
+                }
+            } else {
+                System.out.print("" + lists.get(i).name + " -> No boats 🏄");
+            }
+            System.out.println("\n----------------------------------------------------------------------------\n");
+        }
 
     }
 
