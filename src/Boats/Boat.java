@@ -35,4 +35,12 @@ public abstract class Boat {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
+    public int getLife() {
+        return life;
+    }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
 }
