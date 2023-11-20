@@ -99,8 +99,9 @@ public class PvP {
             y = sc.nextInt();
             boolean boatExistsPlayer1 = existsBoat(NavalBattle.positions1, y, newX);
 
-            boatLifePlayer2 = NavalBattle.positions1[y][newX].getBoat().getLife();
-
+            if(NavalBattle.positions1[y][newX].boat != null) {
+                boatLifePlayer2 = NavalBattle.positions1[y][newX].getBoat().getLife();
+            }
             if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" 🔥")) {
                 System.out.println("You already shot this boat... Try Again!");
             } else if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" ☠️")) {
@@ -108,15 +109,7 @@ public class PvP {
             }
 
             if (boatExistsPlayer1) {
-                NavalBattle.positions1[y][newX].hit = true;
-                NavalBattle.positions1[y][newX].field = " 🔥";
-                int boatLife = NavalBattle.positions1[y][newX].getBoat().getLife();
-                boatLife--;
-
-                if (boatLife == 0) {
-                    System.out.println("You sunk a boat!");
-                    NavalBattle.positions1[y][newX].field = " ☠️";
-                }
+                    NavalBattle.positions1[y][newX].boat.getHit();
             } else {
                 System.out.println("Missed!");
                 NavalBattle.positions1[y][newX].setField(" 💧");
@@ -135,14 +128,15 @@ public class PvP {
         while (boatLifePlayer1 > 0) {
             System.out.print("Set the X: ");
             String x = sc.next();
-            newX = convertToLetter(x);
+            newX = convertToLetter(x)-1;
 
             System.out.print("Set the Y: ");
             y = sc.nextInt();
             boolean boatExistsPlayer = existsBoat(NavalBattle.positions, y, newX);
 
-            boatLifePlayer1 = NavalBattle.positions[y][newX].boat.getLife();
-
+            if(NavalBattle.positions[y][newX].boat != null) {
+                boatLifePlayer1 = NavalBattle.positions[y][newX].boat.getLife();
+            }
             if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" 🔥")) {
                 System.out.println("You already shot this boat... Try Again!");
             } else if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" ☠️")) {
@@ -150,14 +144,10 @@ public class PvP {
             }
 
             if (boatExistsPlayer) {
-                NavalBattle.positions[y][newX].field = " 🔥";
-                boatLifePlayer1--;
-                if (boatLifePlayer1 ==  0) {
-                    NavalBattle.positions[y][newX].field = " ☠️";
-                }
+                NavalBattle.positions[y][newX].boat.getHit();
+
             } else {
                 System.out.println("Missed!");
-                NavalBattle.positions[y][newX] = new PositionField();
                 NavalBattle.positions[y][newX].field = " 💧";
 
             }

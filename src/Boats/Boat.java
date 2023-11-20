@@ -43,4 +43,12 @@ public abstract class Boat {
     public void setLife(int life) {
         this.life = life;
     }
+
+    public void getHit(){
+        life--;
+        symbol=" 🔥";
+        if(life==0){
+            symbol=" ☠️";
+        }
+    }
 }
