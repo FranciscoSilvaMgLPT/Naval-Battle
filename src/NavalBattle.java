@@ -19,7 +19,6 @@ public class NavalBattle {
 
         ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(),new MediumBoat(),new BigBoat()));
         new BoatList(classic, Colors.CYAN+"Classic"+Colors.RESET);
-
         System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
         Thread.sleep(1000);
         System.out.print(" !");
