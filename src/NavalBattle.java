@@ -13,6 +13,12 @@ public class NavalBattle {
 
     static PositionField[][] positions = new PositionField[9][9];
     static PositionField[][] positions1 = new PositionField[9][9];
+    static PositionField[][] fakePlayerField = new PositionField[9][9];
+    static PositionField[][] fakeCPUField = new PositionField[9][9];
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+        start();
+    }
 
     public static void start() throws InterruptedException, IOException {
 
@@ -26,8 +32,8 @@ public class NavalBattle {
         System.out.println(" !"+Colors.RESET);
         Thread.sleep(1000);
 
-          // Logo.logoCinematic();
-            menu();
+        // Logo.logoCinematic();
+        menu();
 
         }
 
@@ -80,7 +86,8 @@ public class NavalBattle {
                     PvP.start(player1, player2);
                 break;
             case 2:
-                player1 = "Player";
+                System.out.print("Player: ");
+                player1 = sc.nextLine();
                 player2 = "CPU";
                 PvC.start(player1, player2);
                 break;
@@ -95,26 +102,14 @@ public class NavalBattle {
         }
     }
 
-    public static void pvc() {
-        System.out.print(
-                "🛳️ Naval battle! 🛳\n\n" +
-                        "Insert name.\n" +
-                        "P1 name:");
-        sc.nextLine();
-        player1 = sc.nextLine();
-        player2 = "CPU";
-
-    }
-
-
-
     public static void fillBoard() {
         for (int x = 0; x < 9; x++) {
             for (int y = 0; y < 9; y++) {
                 positions[x][y] = new PositionField();
-                positions[x][y] = new PositionField();
                 positions1[x][y] = new PositionField();
-                positions1[x][y] = new PositionField();
+
+                fakePlayerField[x][y] = new PositionField();
+                fakeCPUField[x][y] = new PositionField();
             }
         }
     }
@@ -166,6 +161,23 @@ public class NavalBattle {
         }
     }
 
+    public static void printBothFakeBoards(String player1, String player2) {
+        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+                "            Y                                                                                                                   Y\n" +
+                "            ⬇️                                                                                                                  ⬇️\n" +
+                "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |"+Colors.RESET + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
+
+        for (int i = 0; i < fakePlayerField.length; i++) {
+            System.out.print("            " +Colors.PURPLE+ (i + 1) +" |"+Colors.RESET);
+            for (int j = 0; j < fakePlayerField[i].length; j++) {
+                System.out.print(fakePlayerField[i][j].field + "|");
+            }
+            System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t");
+            System.out.print((Colors.PURPLE+ (i + 1) +" |"+Colors.RESET));
+            for (int j = 0; j < fakeCPUField[i].length; j++) {
+                System.out.print(fakeCPUField[i][j].field + "|");
+            }
+            System.out.println();
+        }
+    }
 }
-
-
