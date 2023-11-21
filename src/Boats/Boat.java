@@ -3,14 +3,20 @@ package Boats;
 public abstract class Boat {
     String name;
     int size;
-    int life = size;
+
+    int lifePlayer1;
+
+    int lifePlayer2;
     String symbol;
 
     public Boat(String name, int size,  String symbol) {
         this.name = name;
         this.size = size;
         this.symbol = symbol;
+        this.lifePlayer1 = size;
+        this.lifePlayer2 = size;
     }
+
 
     public String getName() {
         return name;
@@ -36,19 +42,23 @@ public abstract class Boat {
         this.symbol = symbol;
     }
 
-    public int getLife() {
-        return life;
+
+    public int getLifePlayer1() {
+        return lifePlayer1;
     }
 
-    public void setLife(int life) {
-        this.life = life;
+    public void setLifePlayer1(int lifePlayer1) {
+        this.lifePlayer1 = lifePlayer1;
     }
 
-    public void getHit(){
-        life--;
-        symbol=" 🔥";
-        if(life==0){
-            symbol=" ☠️";
-        }
+    public int getLifePlayer2() {
+        return lifePlayer2;
+    }
+
+    public void setLifePlayer2(int lifePlayer2) {
+        this.lifePlayer2 = lifePlayer2;
     }
 }
+
+
+
