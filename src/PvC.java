@@ -56,12 +56,7 @@ public class PvC {
         Thread.sleep(1000);
 
         while (!gameOver) {
-            System.out.print(Colors.BLUE + "PLAYER ATTACKING.");
-            Thread.sleep(1000);
-            System.out.print(".");
-            Thread.sleep(1000);
-            System.out.println("." + Colors.RESET);
-            Thread.sleep(1000);
+
             NavalBattle.printBothFakeBoards(player1, player2);
             playerAttack(player1, player2);
 
@@ -77,16 +72,10 @@ public class PvC {
             }
 
             System.out.println("\n\n\n\n\n\n\n\n\n");
-            System.out.print(Colors.BLUE + "CPU ATTACKING.");
-            Thread.sleep(1000);
-            System.out.print(".");
-            Thread.sleep(1000);
-            System.out.println("." + Colors.RESET);
-            Thread.sleep(1000);
             NavalBattle.printBothFakeBoards(player1, player2);
             cpuAttack(player1, player2);
 
-            if (checkWinCPU()) {
+            if (checkWinPlayer2()) {
                 System.out.print(Colors.BLUE + "Checking board.");
                 Thread.sleep(500);
                 System.out.print(".");
@@ -110,7 +99,7 @@ public class PvC {
         return true;
     }
 
-    static boolean checkWinCPU() {
+    static boolean checkWinPlayer2() {
         for (int i = 0; i < NavalBattle.positions.length; i++) {
             for (int j = 0; j < NavalBattle.positions[i].length; j++) {
                 if (NavalBattle.positions[i][j].boat != null && !NavalBattle.positions[i][j].hit) {
