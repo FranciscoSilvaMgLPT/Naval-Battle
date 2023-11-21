@@ -126,19 +126,30 @@ public class PvC {
 
         System.out.println("Enter the coordinates to attack:");
         System.out.print("X: ");
-        int position1 = sc.nextInt() - 1;
+        String x = sc.next();
+        int newX = convertToLetter(x);
         System.out.print("Y: ");
-        int position2 = sc.nextInt() - 1;
+        int y = sc.nextInt();
+        int newY = y - 1;
 
-        boolean existsBoatInCPUBoard = existsBoatInCPUBoard(position1, position2);
+        boolean existsBoatInCPUBoard = existsBoatInCPUBoard(newY, newX);
 
         if (existsBoatInCPUBoard) {
-            NavalBattle.positions1[position1][position2].hit = true;
-            NavalBattle.fakeCPUField[position1][position2].field = " ☠️";
-        } else {
-            NavalBattle.fakeCPUField[position1][position2].field = " 💧";
-        }
+            NavalBattle.positions1[newY][newX].hit = true;
+            NavalBattle.fakeCPUField[newY][newX].field = " 🔥";
 
+            Boat hitBoat = NavalBattle.positions1[newY][newX].boat;
+
+            if (hitBoat.getLifeCPUBoard() > 0) {
+                hitBoat.setLifeCPUBoard(hitBoat.getLifeCPUBoard() - 1);
+            }
+            if (checkWholeShipHitCPU(hitBoat)) {
+                changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
+            }
+
+        } else {
+            NavalBattle.fakeCPUField[newY][newX].field = " 💧";
+        }
         NavalBattle.printBothFakeBoards(player1, player2);
     }
 
@@ -147,19 +158,49 @@ public class PvC {
 
         System.out.println("Enter the coordinates to attack:");
         System.out.print("X: ");
-        int position1 = sc.nextInt() - 1;
+        String x = sc.next();
+        int newX = convertToLetter(x);
         System.out.print("Y: ");
-        int position2 = sc.nextInt() - 1;
+        int y = sc.nextInt();
+        int newY = y - 1;
 
-        boolean existsBoatInPlayerBoard = existsBoatInPlayerBoard(position1, position2);
+        boolean existsBoatInPlayerBoard = existsBoatInPlayerBoard(newY, newX);
 
         if (existsBoatInPlayerBoard) {
-            NavalBattle.fakePlayerField[position1][position2].field = " ☠️";
-        } else {
-            NavalBattle.fakePlayerField[position1][position2].field = " 💧";
-        }
+            NavalBattle.positions[newY][newX].hit = true;
+            NavalBattle.fakePlayerField[newY][newX].field = " 🔥";
 
+            Boat hitBoat = NavalBattle.positions[newY][newX].boat;
+
+            if (hitBoat.getLifePlayerBoard() > 0) {
+                hitBoat.setLifePlayerBoard(hitBoat.getLifePlayerBoard() - 1);
+            }
+            if (checkWholeShipHitPlayer(hitBoat)) {
+                changeEmojiInFakeBoard(NavalBattle.fakePlayerField, NavalBattle.positions, hitBoat);
+            }
+
+        } else {
+            NavalBattle.fakePlayerField[newY][newX].field = " 💧";
+        }
         NavalBattle.printBothFakeBoards(player1, player2);
+    }
+
+    private static boolean checkWholeShipHitPlayer(Boat boat) {
+        return boat.getLifePlayerBoard() == 0;
+    }
+    private static boolean checkWholeShipHitCPU(Boat boat) {
+        return boat.getLifeCPUBoard() == 0;
+    }
+
+    private static void changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
+        String boatSymbol = boat.getSymbol();
+        for (int i = 0; i < cpuBoard.length; i++) {
+            for (int j = 0; j < cpuBoard[i].length; j++) {
+                if (cpuBoard[i][j].boat != null && cpuBoard[i][j].boat.getSymbol().equals(boatSymbol) && cpuBoard[i][j].hit) {
+                    fakeBoard[i][j].field = " ☠️";
+                }
+            }
+        }
     }
 
     static void gameOver(String player) throws InterruptedException {
