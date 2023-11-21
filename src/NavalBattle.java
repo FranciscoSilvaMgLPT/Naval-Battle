@@ -142,7 +142,7 @@ public class NavalBattle {
         }
     }
     public static void printBothBoards(String player1, String player2) {
-        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y                                                                                                                   Y\n" +
                 "            ⬇️                                                                                                                  ⬇️\n" +
                 "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |"+Colors.RESET + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);
@@ -162,7 +162,7 @@ public class NavalBattle {
     }
 
     public static void printBothFakeBoards(String player1, String player2) {
-        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
+        System.out.print("                        " + Colors.BLUE + player1 + " TERRITORY" + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.RED + player2 + " TERRITORY" + Colors.RESET + "\n" +
                 "            Y                                                                                                                   Y\n" +
                 "            ⬇️                                                                                                                  ⬇️\n" +
                 "        X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |"+Colors.RESET + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + "X ➡️ "+Colors.PURPLE+" | 𝐀 | 𝐁 | 𝐂 | 𝐃 | 𝐄 | 𝐅 | 𝐆 | 𝐇 | 𝐈 |\n"+Colors.RESET);

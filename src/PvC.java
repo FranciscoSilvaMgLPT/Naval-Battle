@@ -2,6 +2,7 @@ import Assets.Colors;
 import Boats.Boat;
 
 import java.util.Scanner;
+import java.util.stream.Stream;
 
 public class PvC {
 
@@ -12,13 +13,13 @@ public class PvC {
     static void start(String player1, String player2) throws InterruptedException {
         NavalBattle.printBothBoards(player1, player2);
         Thread.sleep(2500);
-        System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "LOADING TO SET PLAYER 1 BOATS.");
+        System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "LOADING TO SET " + player1 + " BOATS.");
         Thread.sleep(1000);
         System.out.print(".");
         Thread.sleep(1000);
         System.out.println("." + Colors.RESET);
         Thread.sleep(1500);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         setPlayersBoats(player1, player2);
     }
@@ -27,17 +28,23 @@ public class PvC {
         boolean playerOneIsReady = false;
         boolean playerTwoIsReady = false;
         while (!(playerOneIsReady && playerTwoIsReady)) {
-            playerOneIsReady = player1SetBoat(player1, player2);
+            playerOneIsReady = player1SetBoat(player1);
 
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-            System.out.print(Colors.BLUE + "Loading CPU territory.");
+            System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "LOADING " + player2 + " TERRITORY.");
             Thread.sleep(1000);
             System.out.print(".");
             Thread.sleep(1000);
             System.out.println("." + Colors.RESET);
             Thread.sleep(1000);
-            playerTwoIsReady = player2SetBoat(player1, player2);
+            System.out.print("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "PREPARING TERRITORY.");
+            Thread.sleep(1000);
+            System.out.print(".");
+            Thread.sleep(1000);
+            System.out.println("." + Colors.RESET);
+            Thread.sleep(1000);
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            playerTwoIsReady = player2SetBoat();
+            NavalBattle.printPlayer2Board(player2);
         }
 
         System.out.println("\nPLAYERS STATUS:");
@@ -56,12 +63,14 @@ public class PvC {
         Thread.sleep(1000);
 
         while (!gameOver) {
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print(Colors.BLUE + "PLAYER ATTACKING.");
             Thread.sleep(1000);
             System.out.print(".");
             Thread.sleep(1000);
             System.out.println("." + Colors.RESET);
             Thread.sleep(1000);
+            System.out.println("\n");
             NavalBattle.printBothFakeBoards(player1, player2);
             playerAttack(player1, player2);
 
@@ -76,18 +85,20 @@ public class PvC {
                 gameOver(player1);
             }
 
-            System.out.println("\n\n\n\n\n\n\n\n\n");
+            Thread.sleep(4000);
+
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print(Colors.BLUE + "CPU ATTACKING.");
             Thread.sleep(1000);
             System.out.print(".");
             Thread.sleep(1000);
             System.out.println("." + Colors.RESET);
             Thread.sleep(1000);
-            NavalBattle.printBothFakeBoards(player1, player2);
+            System.out.println("\n");
             cpuAttack(player1, player2);
 
             if (checkWinCPU()) {
-                System.out.print(Colors.BLUE + "Checking board.");
+                System.out.print(Colors.BLUE + "Checking " + player1 + " board.");
                 Thread.sleep(500);
                 System.out.print(".");
                 Thread.sleep(500);
@@ -96,6 +107,8 @@ public class PvC {
                 gameOver = true;
                 gameOver(player2);
             }
+
+            Thread.sleep(4000);
         }
     }
 
@@ -127,7 +140,7 @@ public class PvC {
         System.out.println("Enter the coordinates to attack:");
         System.out.print("X: ");
         String x = sc.next();
-        int newX = convertToLetter(x);
+        int newX = convertToNumber(x);
         System.out.print("Y: ");
         int y = sc.nextInt();
         int newY = y - 1;
@@ -154,14 +167,11 @@ public class PvC {
     }
 
     static void cpuAttack(String player1, String player2) {
-        Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter the coordinates to attack:");
-        System.out.print("X: ");
-        String x = sc.next();
-        int newX = convertToLetter(x);
-        System.out.print("Y: ");
-        int y = sc.nextInt();
+        int x = (int) (Math.random() * 9) + 1;
+        int newX = x - 1;
+
+        int y = (int) (Math.random() * 9) + 1;
         int newY = y - 1;
 
         boolean existsBoatInPlayerBoard = existsBoatInPlayerBoard(newY, newX);
@@ -254,31 +264,31 @@ public class PvC {
         return true;
     }
 
-    private static boolean canInsertBoatPlayer2(int startY, int startX, int size, String direction) {
+    private static boolean canInsertBoatPlayer2(int startY, int startX, int size, int direction) {
         int y = startY;
         int x = startX;
 
         for (int i = 0; i < size; i++) {
             switch (direction) {
-                case "w":
+                case 1:
                     if (y - 1 < 0 || NavalBattle.positions1[y - 1][x].boat != null) {
                         return false;
                     }
                     y--;
                     break;
-                case "d":
+                case 2:
                     if (x + 1 >= NavalBattle.positions1[0].length || NavalBattle.positions1[y][x + 1].boat != null) {
                         return false;
                     }
                     x++;
                     break;
-                case "s":
+                case 3:
                     if (y + 1 >= NavalBattle.positions1.length || NavalBattle.positions1[y + 1][x].boat != null) {
                         return false;
                     }
                     y++;
                     break;
-                case "a":
+                case 4:
                     if (x - 1 < 0 || NavalBattle.positions1[y][x - 1].boat != null) {
                         return false;
                     }
@@ -336,19 +346,7 @@ public class PvC {
         }
     }
 
-    private static boolean player1SetBoat(String player1, String player2) {
-
-        /*for (int i = 0; i < NavalBattle.positions1.length; i++) {
-            for (int j = 0; j < NavalBattle.positions1.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
-        */
-
+    private static boolean player1SetBoat(String player1) {
 
         CreativeMode.seeListsPvC();
         NavalBattle.printPlayer1Board(player1);
@@ -359,48 +357,29 @@ public class PvC {
 
             System.out.print("Set the X: ");
             String x = sc.next();
-            int newX = convertToLetter(x);
+            int newX = convertToNumber(x);
 
             System.out.print("Set the Y: ");
             int newY = sc.nextInt();
 
             setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
+            NavalBattle.printPlayer1Board(player1);
         }
 
         return true;
     }
 
-    private static boolean player2SetBoat(String player1, String player2) {
-
-        /*
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-
-            }
-        }
-        */
-
-        NavalBattle.printPlayer2Board(player2);
+    private static boolean player2SetBoat() {
         for (int i = 0; i < BoatList.list.size(); i++) {
 
-            System.out.println("\nPosition: " + BoatList.list.get(i).getName());
+            int x = (int) (Math.random() * 9) + 1;
+            int newX = x - 1;
 
-            System.out.print("Set the X: ");
-            String x = sc.next();
-            int newX = convertToLetter(x);
+            int y = (int) (Math.random() * 9) + 1;
+            int newY = y - 1;
 
-            System.out.print("Set the Y: ");
-            int newY = sc.nextInt();
-
-            setDirectionOfBoatAndInsertPlayer2(newY - 1, newX, BoatList.list.get(i));
-
+            setDirectionOfBoatAndInsertPlayer2(newY, newX, BoatList.list.get(i));
         }
-
         return true;
 
     }
@@ -408,52 +387,38 @@ public class PvC {
     private static void setDirectionOfBoatAndInsertPlayer2(int y, int x, Boat boat) {
 
         boolean successfullyInserted = false;
-        /*for (int i = 0; i < NavalBattle.positions1.length; i++) {
-            for (int j = 0; j < NavalBattle.positions1.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions1[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
-
-         */
 
         while (!successfullyInserted) {
-            System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
-            String direction = sc.next().toLowerCase();
+            int direction = (int) (Math.random() * 4) + 1;
             boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
 
             if (canInsertBoat) {
                 for (int i = 0; i < boat.getSize(); i++) {
                     switch (direction) {
-                        case "w":
+                        case 1:
                             NavalBattle.positions1[y][x].insertBoat(boat);
                             y = y - 1;
                             break;
-                        case "d":
+                        case 2:
                             NavalBattle.positions1[y][x].insertBoat(boat);
                             x = x + 1;
                             break;
-                        case "s":
+                        case 3:
                             NavalBattle.positions1[y][x].insertBoat(boat);
                             y = y + 1;
                             break;
-                        case "a":
+                        case 4:
                             NavalBattle.positions1[y][x].insertBoat(boat);
                             x = x - 1;
                             break;
                     }
                 }
                 successfullyInserted = true;
-            } else {
-                System.out.println(Colors.RED + "Cant insert the boat, try again" + Colors.RESET);
             }
         }
     }
 
-    static int convertToLetter(String letter) {
+    static int convertToNumber(String letter) {
         switch (letter.toLowerCase()) {
             case "a":
                 return 0;
