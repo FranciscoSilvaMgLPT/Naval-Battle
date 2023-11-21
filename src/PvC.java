@@ -2,7 +2,6 @@ import Assets.Colors;
 import Boats.Boat;
 
 import java.util.Scanner;
-import java.util.stream.Stream;
 
 public class PvC {
 
@@ -19,7 +18,7 @@ public class PvC {
         Thread.sleep(1000);
         System.out.println("." + Colors.RESET);
         Thread.sleep(1500);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
         setPlayersBoats(player1, player2);
     }
@@ -42,7 +41,7 @@ public class PvC {
             Thread.sleep(1000);
             System.out.println("." + Colors.RESET);
             Thread.sleep(1000);
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             playerTwoIsReady = player2SetBoat();
             NavalBattle.printPlayer2Board(player2);
         }
@@ -63,7 +62,7 @@ public class PvC {
         Thread.sleep(1000);
 
         while (!gameOver) {
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print(Colors.BLUE + "PLAYER ATTACKING.");
             Thread.sleep(1000);
             System.out.print(".");
@@ -85,9 +84,9 @@ public class PvC {
                 gameOver(player1);
             }
 
-            Thread.sleep(4000);
+            loadingBar(5);
 
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print(Colors.BLUE + "CPU ATTACKING.");
             Thread.sleep(1000);
             System.out.print(".");
@@ -108,7 +107,7 @@ public class PvC {
                 gameOver(player2);
             }
 
-            Thread.sleep(4000);
+            loadingBar(5);
         }
     }
 
@@ -303,16 +302,6 @@ public class PvC {
 
     private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
         boolean successfullyInserted = false;
-        /*for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions.length; j++) {
-                for (int k = 0; k < BoatList.list.size(); k++) {
-                    if (NavalBattle.positions[i][j].getField().equals(BoatList.list.get(k).getSymbol())) {
-                        BoatList.list.get(k).setSymbol("⬛");
-                    }
-                }
-            }
-        }
-        */
         while (!successfullyInserted) {
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
             String direction = sc.next().toLowerCase();
@@ -443,5 +432,45 @@ public class PvC {
                 System.out.println("\nInvalid Option");
         }
         return -1;
+    }
+
+    public static void loadingBar(int seconds) {
+        int totalProgress = 100; // Total de progresso (0 a 100%)
+        int barLength = 50; // Comprimento da barra de loading
+        int progress = 0; // Progresso inicial
+        int displayTimeInSeconds = seconds;
+        long startTime = System.currentTimeMillis(); // Tempo inicial
+
+        System.out.println("\nDisplaying board for " + displayTimeInSeconds + " seconds..."); // Descrição inicial
+
+        while (progress <= totalProgress) {
+            long elapsedTime = System.currentTimeMillis() - startTime; // Tempo decorrido
+            double percentage = (double) elapsedTime / (seconds * 1000); // Calcula a porcentagem completada
+
+            progress = (int) (totalProgress * percentage); // Atualiza o progresso
+
+            StringBuilder progressBar = new StringBuilder("[");
+            int numChars = (int) (percentage * barLength);
+
+            for (int i = 0; i < barLength; i++) {
+                if (i < numChars) {
+                    progressBar.append("=");
+                } else {
+                    progressBar.append(" ");
+                }
+            }
+
+            progressBar.append("] " + progress + "%");
+
+            int estimatedTimeRemaining = seconds - (int) (elapsedTime / 1000); // Tempo restante
+            System.out.print("\r" + progressBar + " - Estimated: " + estimatedTimeRemaining + "s remaining");
+
+            try {
+                Thread.sleep(10); // Pequeno atraso para reduzir o uso de recursos
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        System.out.println();
     }
 }
