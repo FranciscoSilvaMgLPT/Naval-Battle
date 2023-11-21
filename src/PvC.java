@@ -263,6 +263,120 @@ public class PvC {
         return true;
     }
 
+    private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
+        boolean successfullyInserted = false;
+        while (!successfullyInserted) {
+            System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
+            String direction = sc.next().toLowerCase();
+            boolean canInsertBoat = canInsertBoatPlayer1(y, x, boat.getSize(), direction);
+
+            if (canInsertBoat) {
+                insertBoatInDirectionInPlayerBoard(y, x, boat, direction);
+                successfullyInserted = true;
+            } else {
+                System.out.println(Colors.RED + "Não é possível inserir o barco nessa posição, por favor, escolha novas coordenadas." + Colors.RESET);
+                System.out.print("Set the X: ");
+                String newX = sc.next();
+                x = convertToNumber(newX);
+
+                System.out.print("Set the Y: ");
+                y = sc.nextInt() - 1;
+            }
+        }
+    }
+
+    private static void insertBoatInDirectionInPlayerBoard(int y, int x, Boat boat, String direction) {
+        for (int i = 0; i < boat.getSize(); i++) {
+            NavalBattle.positions[y][x].insertBoat(boat);
+            switch (direction) {
+                case "w":
+                    y--;
+                    break;
+                case "d":
+                    x++;
+                    break;
+                case "s":
+                    y++;
+                    break;
+                case "a":
+                    x--;
+                    break;
+            }
+        }
+    }
+
+    private static boolean player1SetBoat(String player1) {
+        CreativeMode.seeListsPvC();
+        NavalBattle.printPlayer1Board(player1);
+
+        for (int i = 0; i < BoatList.list.size(); i++) {
+            System.out.println("\nPosition: " + BoatList.list.get(i).getName());
+
+            int x, y;
+            boolean positionOccupied;
+
+            do {
+                System.out.print("Set the X: ");
+                String xInput = sc.next();
+                x = convertToNumber(xInput);
+
+                System.out.print("Set the Y: ");
+                y = sc.nextInt();
+
+                positionOccupied = isPositionOccupiedByBoatInPlayerBoard(x, y);
+                if (positionOccupied) {
+                    System.out.println(Colors.RED + "There's already a boat in that position. Please choose new coordinates." + Colors.RESET);
+                }
+            } while (positionOccupied);
+
+            setDirectionOfBoatAndInsertPlayer1(y - 1, x, BoatList.list.get(i));
+            NavalBattle.printPlayer1Board(player1);
+        }
+
+        return true;
+    }
+
+    private static boolean isPositionOccupiedByBoatInPlayerBoard(int x, int y) {
+        return NavalBattle.positions[y - 1][x].boat != null;
+    }
+
+    private static boolean player2SetBoat() {
+        for (int i = 0; i < BoatList.list.size(); i++) {
+            int x, y;
+            boolean positionOccupied;
+
+            do {
+                x = (int) (Math.random() * 9);
+                y = (int) (Math.random() * 9);
+                positionOccupied = isPositionOccupiedByBoatInCPUBoard(x, y);
+            } while (positionOccupied);
+
+            setDirectionOfBoatAndInsertPlayer2(y, x, BoatList.list.get(i));
+        }
+        return true;
+    }
+
+    private static boolean isPositionOccupiedByBoatInCPUBoard(int x, int y) {
+        return NavalBattle.positions1[y][x].boat != null;
+    }
+
+    private static void setDirectionOfBoatAndInsertPlayer2(int y, int x, Boat boat) {
+        boolean successfullyInserted = false;
+        while (!successfullyInserted) {
+            int direction = (int) (Math.random() * 4) + 1;
+            boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
+
+            if (canInsertBoat) {
+                insertBoatInDirectionInCPUBoard(y, x, boat, direction);
+                successfullyInserted = true;
+            } else {
+                // Se não puder inserir o barco nessa direção, gera novas coordenadas
+                x = (int) (Math.random() * 9);
+                y = (int) (Math.random() * 9);
+            }
+        }
+    }
+
     private static boolean canInsertBoatPlayer2(int startY, int startX, int size, int direction) {
         int y = startY;
         int x = startX;
@@ -300,109 +414,22 @@ public class PvC {
         return true;
     }
 
-    private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
-        boolean successfullyInserted = false;
-        while (!successfullyInserted) {
-            System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
-            String direction = sc.next().toLowerCase();
-            boolean canInsertBoat = canInsertBoatPlayer1(y, x, boat.getSize(), direction);
-
-            if (canInsertBoat) {
-                for (int i = 0; i < boat.getSize(); i++) {
-                    switch (direction) {
-                        case "w":
-                            NavalBattle.positions[y][x].insertBoat(boat);
-                            y = y - 1;
-                            break;
-                        case "d":
-                            NavalBattle.positions[y][x].insertBoat(boat);
-                            x = x + 1;
-                            break;
-                        case "s":
-                            NavalBattle.positions[y][x].insertBoat(boat);
-                            y = y + 1;
-                            break;
-                        case "a":
-                            NavalBattle.positions[y][x].insertBoat(boat);
-                            x = x - 1;
-                            break;
-                    }
-                }
-                successfullyInserted = true;
-            } else {
-                System.out.println(Colors.RED + "Cant insert the boat, try again" + Colors.RESET);
-            }
-        }
-    }
-
-    private static boolean player1SetBoat(String player1) {
-
-        CreativeMode.seeListsPvC();
-        NavalBattle.printPlayer1Board(player1);
-
-        for (int i = 0; i < BoatList.list.size(); i++) {
-
-            System.out.println("\nPosition: " + BoatList.list.get(i).getName());
-
-            System.out.print("Set the X: ");
-            String x = sc.next();
-            int newX = convertToNumber(x);
-
-            System.out.print("Set the Y: ");
-            int newY = sc.nextInt();
-
-            setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
-            NavalBattle.printPlayer1Board(player1);
-        }
-
-        return true;
-    }
-
-    private static boolean player2SetBoat() {
-        for (int i = 0; i < BoatList.list.size(); i++) {
-
-            int x = (int) (Math.random() * 9) + 1;
-            int newX = x - 1;
-
-            int y = (int) (Math.random() * 9) + 1;
-            int newY = y - 1;
-
-            setDirectionOfBoatAndInsertPlayer2(newY, newX, BoatList.list.get(i));
-        }
-        return true;
-
-    }
-
-    private static void setDirectionOfBoatAndInsertPlayer2(int y, int x, Boat boat) {
-
-        boolean successfullyInserted = false;
-
-        while (!successfullyInserted) {
-            int direction = (int) (Math.random() * 4) + 1;
-            boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
-
-            if (canInsertBoat) {
-                for (int i = 0; i < boat.getSize(); i++) {
-                    switch (direction) {
-                        case 1:
-                            NavalBattle.positions1[y][x].insertBoat(boat);
-                            y = y - 1;
-                            break;
-                        case 2:
-                            NavalBattle.positions1[y][x].insertBoat(boat);
-                            x = x + 1;
-                            break;
-                        case 3:
-                            NavalBattle.positions1[y][x].insertBoat(boat);
-                            y = y + 1;
-                            break;
-                        case 4:
-                            NavalBattle.positions1[y][x].insertBoat(boat);
-                            x = x - 1;
-                            break;
-                    }
-                }
-                successfullyInserted = true;
+    private static void insertBoatInDirectionInCPUBoard(int y, int x, Boat boat, int direction) {
+        for (int i = 0; i < boat.getSize(); i++) {
+            NavalBattle.positions1[y][x].insertBoat(boat);
+            switch (direction) {
+                case 1:
+                    y--;
+                    break;
+                case 2:
+                    x++;
+                    break;
+                case 3:
+                    y++;
+                    break;
+                case 4:
+                    x--;
+                    break;
             }
         }
     }
@@ -427,7 +454,6 @@ public class PvC {
                 return 7;
             case "i":
                 return 8;
-
             default:
                 System.out.println("\nInvalid Option");
         }
@@ -435,19 +461,19 @@ public class PvC {
     }
 
     public static void loadingBar(int seconds) {
-        int totalProgress = 100; // Total de progresso (0 a 100%)
-        int barLength = 50; // Comprimento da barra de loading
-        int progress = 0; // Progresso inicial
+        int totalProgress = 100;
+        int barLength = 50;
+        int progress = 0;
         int displayTimeInSeconds = seconds;
-        long startTime = System.currentTimeMillis(); // Tempo inicial
+        long startTime = System.currentTimeMillis();
 
-        System.out.println("\nDisplaying board for " + displayTimeInSeconds + " seconds..."); // Descrição inicial
+        System.out.println("\nDisplaying board for " + displayTimeInSeconds + " seconds...");
 
         while (progress <= totalProgress) {
-            long elapsedTime = System.currentTimeMillis() - startTime; // Tempo decorrido
-            double percentage = (double) elapsedTime / (seconds * 1000); // Calcula a porcentagem completada
+            long elapsedTime = System.currentTimeMillis() - startTime;
+            double percentage = (double) elapsedTime / (seconds * 1000);
 
-            progress = (int) (totalProgress * percentage); // Atualiza o progresso
+            progress = (int) (totalProgress * percentage);
 
             StringBuilder progressBar = new StringBuilder("[");
             int numChars = (int) (percentage * barLength);
@@ -462,11 +488,11 @@ public class PvC {
 
             progressBar.append("] " + progress + "%");
 
-            int estimatedTimeRemaining = seconds - (int) (elapsedTime / 1000); // Tempo restante
+            int estimatedTimeRemaining = seconds - (int) (elapsedTime / 1000);
             System.out.print("\r" + progressBar + " - Estimated: " + estimatedTimeRemaining + "s remaining");
 
             try {
-                Thread.sleep(10); // Pequeno atraso para reduzir o uso de recursos
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
