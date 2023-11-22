@@ -317,23 +317,29 @@ public class PvP {
     private static boolean player1SetBoat(String player1) {
 
         CreativeMode.seeListsPvC();
-
-
         NavalBattle.printPlayer1Board(player1);
 
         for (int i = 0; i < BoatList.list.size(); i++) {
-
             System.out.println("\nPosition: " + BoatList.list.get(i).getName());
+            boolean positionOccupied;
+            int x, y;
+            do {
 
             System.out.print("Set the X: ");
 
-            String x = sc.next();
-            int newX = convertToLetter(x);
+            String xInput = sc.next();
+            x = convertToLetter(xInput);
 
             System.out.print("Set the Y: ");
-            int newY = sc.nextInt();
+            y = sc.nextInt();
 
-            setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
+                positionOccupied = isPositionOccupiedByBoatInPlayerBoard(x, y);
+                if (positionOccupied) {
+                    System.out.println(Colors.RED + "There's already a boat in that position. Please choose new coordinates." + Colors.RESET);
+                }
+
+            } while (positionOccupied);
+            setDirectionOfBoatAndInsertPlayer1(y - 1, x, BoatList.list.get(i));
             NavalBattle.printPlayer1Board(player1);
         }
 
@@ -346,18 +352,26 @@ public class PvP {
 
         NavalBattle.printPlayer2Board(player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
+            boolean positionOccupied;
+            int x, y;
+            do {
 
             System.out.println("\nPosition: " + BoatList.list.get(i).getName());
 
             System.out.print("Set the X: ");
 
-            String x = sc.next();
-            int newX = convertToLetter(x);
+            String xInput = sc.next();
+            x = convertToLetter(xInput);
 
             System.out.print("Set the Y: ");
-            int newY = sc.nextInt();
+            y = sc.nextInt();
+                positionOccupied = isPositionOccupiedByBoatInPlayerBoard2(x, y);
+                if (positionOccupied) {
+                    System.out.println(Colors.RED + "There's already a boat in that position. Please choose new coordinates." + Colors.RESET);
+                }
 
-            setDirectionOfBoatAndInsertPlayer2(newY - 1, newX, BoatList.list.get(i));
+            } while (positionOccupied);
+            setDirectionOfBoatAndInsertPlayer2(y - 1, x, BoatList.list.get(i));
             NavalBattle.printPlayer2Board(player2);
 
         }
@@ -401,6 +415,12 @@ public class PvP {
                 System.out.println(Colors.RED + "Cant insert the boat, try again" + Colors.RESET);
             }
         }
+    }
+    private static boolean isPositionOccupiedByBoatInPlayerBoard(int x, int y) {
+        return NavalBattle.positions[y - 1][x].boat != null;
+    }
+    private static boolean isPositionOccupiedByBoatInPlayerBoard2(int x, int y) {
+        return NavalBattle.positions1[y - 1][x].boat != null;
     }
 
     static int convertToLetter(String letter) {
