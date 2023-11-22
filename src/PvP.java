@@ -117,9 +117,9 @@ public class PvP {
         int y = sc.nextInt();
         int newY = y - 1;
 
-        boolean existsBoatInCPUBoard = existsBoatInCPUBoard(newY, newX);
+        boolean existsBoatInPlayer2Board = existsBoatInCPUBoard(newY, newX);
 
-        if (existsBoatInCPUBoard) {
+        if (existsBoatInPlayer2Board) {
             NavalBattle.positions1[newY][newX].hit = true;
             NavalBattle.fakeCPUField[newY][newX].field = " 🔥";
 
@@ -128,8 +128,14 @@ public class PvP {
             if (hitBoat.getLifeCPUBoard() > 0) {
                 hitBoat.setLifeCPUBoard(hitBoat.getLifeCPUBoard() - 1);
             }
+            boolean emojisChanged = false;
+
             if (checkWholeShipHitCPU(hitBoat)) {
-                changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
+                emojisChanged = changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
+
+            }
+            if (emojisChanged) {
+                System.out.println("\nYou sank a boat! [" + hitBoat.getName() + "]");
             }
 
         } else {
@@ -178,15 +184,19 @@ public class PvP {
         return boat.getLifeCPUBoard() == 0;
     }
 
-    private static void changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
+    private static boolean changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] player2board, Boat boat) {
         String boatSymbol = boat.getSymbol();
-        for (int i = 0; i < cpuBoard.length; i++) {
-            for (int j = 0; j < cpuBoard[i].length; j++) {
-                if (cpuBoard[i][j].boat != null && cpuBoard[i][j].boat.getSymbol().equals(boatSymbol) && cpuBoard[i][j].hit) {
+        boolean emojisChanged = false;
+        for (int i = 0; i < player2board.length; i++) {
+            for (int j = 0; j < player2board[i].length; j++) {
+                if (player2board[i][j].boat != null && player2board[i][j].boat.getSymbol().equals(boatSymbol) && player2board[i][j].hit) {
                     fakeBoard[i][j].field = " ☠️";
+                    emojisChanged = true;
                 }
             }
         }
+        return emojisChanged;
+
     }
 
     static void gameOver(String player) throws InterruptedException {
