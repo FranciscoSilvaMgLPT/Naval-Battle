@@ -173,6 +173,7 @@ public class PvP {
     private static boolean checkWholeShipHitPlayer(Boat boat) {
         return boat.getLifePlayerBoard() == 0;
     }
+
     private static boolean checkWholeShipHitCPU(Boat boat) {
         return boat.getLifeCPUBoard() == 0;
     }
@@ -339,7 +340,7 @@ public class PvP {
         return true;
     }
 
-    private static boolean player2SetBoat( String player2) {
+    private static boolean player2SetBoat(String player2) {
         CreativeMode.seeListsPvC();
 
 
@@ -428,4 +429,5 @@ public class PvP {
         }
         return -1;
     }
+}
 

@@ -4,7 +4,21 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="" />
+    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/src/DolbySystem.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sound/aii.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sound/explosion.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sound/fatality.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sound/music.wav" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/src/Sound/splash.wav" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Boats/Boat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Boats/Boat.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/CreativeMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CreativeMode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NavalBattle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NavalBattle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PvC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PvC.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PvP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PvP.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,19 +37,23 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2YFkGomYd4aJ3g05SlN5IR5qCKX" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true">
+    <ConfirmationsSetting value="2" id="Add" />
+  </component>
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "ASKED_ADD_EXTERNAL_FILES": "true",
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pvc2.0",
+    "git-widget-placeholder": "main",
     "last_opened_file_path": "/Users/mindera/Documents/School/others/Naval-Battle"
   }
 }]]></component>
@@ -63,5 +81,8 @@
       <updated>1700128621557</updated>
     </task>
     <servers />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <option name="ADD_EXTERNAL_FILES_SILENTLY" value="true" />
   </component>
 </project>
