@@ -3,13 +3,16 @@ package Boats;
 public abstract class Boat {
     String name;
     int size;
-    int life = size;
+    int lifePlayerBoard;
+    int lifeCPUBoard;
     String symbol;
 
     public Boat(String name, int size,  String symbol) {
         this.name = name;
         this.size = size;
         this.symbol = symbol;
+        this.lifeCPUBoard = size;
+        this.lifePlayerBoard = size;
     }
 
     public String getName() {
@@ -36,6 +39,22 @@ public abstract class Boat {
         this.symbol = symbol;
     }
 
+
+    public int getLifePlayerBoard() {
+        return lifePlayerBoard;
+    }
+
+    public void setLifePlayerBoard(int lifePlayerBoard) {
+        this.lifePlayerBoard = lifePlayerBoard;
+    }
+
+    public int getLifeCPUBoard() {
+        return lifeCPUBoard;
+    }
+
+    public void setLifeCPUBoard(int lifeCPUBoard) {
+        this.lifeCPUBoard = lifeCPUBoard;
+
     public int getLife() {
         return life;
     }
@@ -50,5 +69,5 @@ public abstract class Boat {
         if(life==0){
             symbol=" ☠️";
         }
-    }
+
 }
