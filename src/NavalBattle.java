@@ -2,6 +2,8 @@ import Assets.Colors;
 import Assets.Logo;
 import Boats.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -17,15 +19,15 @@ public class NavalBattle {
     static PositionField[][] fakePlayerField = new PositionField[9][9];
     static PositionField[][] fakeCPUField = new PositionField[9][9];
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
         start();
     }
 
-    public static void start() throws InterruptedException, IOException {
+    public static void start() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(), new MediumBoat(), new BigBoat()));
         new BoatList(classic, Colors.CYAN + "Classic" + Colors.RESET);
-
+        new DolbySystem().backgroundMusic();
         System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
         Thread.sleep(1000);
         System.out.print(" !");
@@ -38,7 +40,7 @@ public class NavalBattle {
     }
 
 
-    public static void menu() throws InterruptedException, IOException {
+    public static void menu() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
 
         while (option != 0) {
             Thread.sleep(1500);
@@ -60,7 +62,7 @@ public class NavalBattle {
         }
     }
 
-    public static void play() throws InterruptedException, IOException {
+    public static void play() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
         fillBoard();
         Scanner sc = new Scanner(System.in);
         String player1;

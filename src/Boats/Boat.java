@@ -55,5 +55,4 @@ public abstract class Boat {
     public void setLifeCPUBoard(int lifeCPUBoard) {
         this.lifeCPUBoard = lifeCPUBoard;
     }
-
 }

@@ -1,6 +1,9 @@
 import Assets.Colors;
 import Boats.Boat;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PvC {
@@ -9,7 +12,7 @@ public class PvC {
     BoatList boatlist = CreativeMode.lists.get(0);
     private static boolean gameOver;
 
-    static void start(String player1, String player2) throws InterruptedException {
+    static void start(String player1, String player2) throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
         loadingBar(3, "LOADING GAME...");
 
         NavalBattle.printBothBoards(player1, player2);
@@ -26,7 +29,7 @@ public class PvC {
         setPlayersBoats(player1, player2);
     }
 
-    static void setPlayersBoats(String player1, String player2) throws InterruptedException {
+    static void setPlayersBoats(String player1, String player2) throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
         boolean playerOneIsReady = false;
         boolean playerTwoIsReady = false;
         while (!(playerOneIsReady && playerTwoIsReady)) {
@@ -58,7 +61,7 @@ public class PvC {
         game(player1, player2);
     }
 
-    static void game(String player1, String player2) throws InterruptedException {
+    static void game(String player1, String player2) throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
         System.out.print(Colors.BLUE + "STARTING GAME.");
         Thread.sleep(1000);
         System.out.print(".");
@@ -122,7 +125,8 @@ public class PvC {
         return true;
     }
 
-    static void playerAttack(String player1, String player2) {
+    static void playerAttack(String player1, String player2) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        DolbySystem dolbySystem = new DolbySystem();
         Scanner sc = new Scanner(System.in);
 
         System.out.println("\nEnter the coordinates to attack:");
@@ -134,6 +138,7 @@ public class PvC {
         int newY = y - 1;
 
         if (x.equalsIgnoreCase("A") && y == 69) {
+            dolbySystem.cheatSound();
             NavalBattle.printPlayer2Board(player2);
             playerAttack(player1, player2);
             return;
@@ -144,7 +149,7 @@ public class PvC {
         if (existsBoatInCPUBoard) {
             NavalBattle.positions1[newY][newX].hit = true;
             NavalBattle.fakeCPUField[newY][newX].field = " 🔥";
-
+            dolbySystem.bombSound();
             Boat hitBoat = NavalBattle.positions1[newY][newX].boat;
 
             if (hitBoat.getLifeCPUBoard() > 0) {
@@ -166,14 +171,15 @@ public class PvC {
 
         } else {
             NavalBattle.fakeCPUField[newY][newX].field = " 💧";
+            dolbySystem.splashSound();
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             NavalBattle.printBothFakeBoards(player1, player2);
             loadingBar(5, "DISPLAYING BOARD...");
         }
     }
 
-    static void cpuAttack(String player1, String player2) {
-
+    static void cpuAttack(String player1, String player2) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        DolbySystem dolbySystem = new DolbySystem();
         int x = (int) (Math.random() * 9) + 1;
         int newX = x - 1;
 
@@ -185,7 +191,7 @@ public class PvC {
         if (existsBoatInPlayerBoard) {
             NavalBattle.positions[newY][newX].hit = true;
             NavalBattle.fakePlayerField[newY][newX].field = " 🔥";
-
+            dolbySystem.bombSound();
             Boat hitBoat = NavalBattle.positions[newY][newX].boat;
 
             if (hitBoat.getLifePlayerBoard() > 0) {
@@ -197,6 +203,7 @@ public class PvC {
 
         } else {
             NavalBattle.fakePlayerField[newY][newX].field = " 💧";
+            dolbySystem.splashSound();
         }
         NavalBattle.printBothFakeBoards(player1, player2);
         loadingBar(5, "DISPLAYING BOARD...");
@@ -210,7 +217,8 @@ public class PvC {
         return boat.getLifeCPUBoard() == 0;
     }
 
-    private static boolean changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
+    private static boolean changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) throws UnsupportedAudioFileException, LineUnavailableException, IOException {
+        DolbySystem dolbySystem = new DolbySystem();
         String boatSymbol = boat.getSymbol();
         boolean emojisChanged = false;
 
@@ -218,6 +226,7 @@ public class PvC {
             for (int j = 0; j < cpuBoard[i].length; j++) {
                 if (cpuBoard[i][j].boat != null && cpuBoard[i][j].boat.getSymbol().equals(boatSymbol) && cpuBoard[i][j].hit) {
                     fakeBoard[i][j].field = " ☠️";
+                    dolbySystem.fatalitySound();
                     emojisChanged = true;
                 }
             }
