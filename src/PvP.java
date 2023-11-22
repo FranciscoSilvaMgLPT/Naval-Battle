@@ -5,160 +5,202 @@ import java.util.Scanner;
 public class PvP {
 
     static Scanner sc = new Scanner(System.in);
-
     BoatList boatlist = CreativeMode.lists.get(0);
 
+    private static boolean gameOver;
+
     static void start(String player1, String player2) throws InterruptedException {
-        positionBoats(player1,player2);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        attack(player1,player2);
+        NavalBattle.printBothBoards(player1, player2);
+        Thread.sleep(2500);
+        System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "LOADING TO SET PLAYER 1 BOATS.");
+        Thread.sleep(1000);
+        System.out.print(".");
+        Thread.sleep(1000);
+        System.out.println("." + Colors.RESET);
+        Thread.sleep(1500);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-
+        setPlayersBoats(player1, player2);
     }
 
+    static void setPlayersBoats(String player1, String player2) throws InterruptedException {
+        boolean playerOneIsReady = false;
+        boolean playerTwoIsReady = false;
+        while (!(playerOneIsReady && playerTwoIsReady)) {
+            playerOneIsReady = player1SetBoat(player1);
 
 
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
-    static void positionBoats(String player1, String player2) {
-
-        System.out.println("Positioning your Boats " + "" + player1);
-        player1SetBoat(player1);
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-
-        System.out.println("Positioning your Boats " + "" + player2);
-        player2SetBoat(player2);
-
-
-    }
-
-    //boolean boatExistsPlayer2 = existsBoat(NavalBattle.positions1,y ,newX);
-    static void attack(String player1, String player2) throws InterruptedException {
-        System.out.print(Colors.CYAN +"Get the cannons ready.");
-        Thread.sleep(1000);
-        System.out.print(Colors.CYAN +".");
-        Thread.sleep(1000);
-        System.out.print(Colors.CYAN +".🔥");
-        Thread.sleep(1000);
-
-        hideBoatsPlayers(player1, player2);
-
-        while (!areAllBoatsDestroyedPlayer1() || !areAllBoatsDestroyedPlayer2()) {
-
-
-            displayBothBoards(player1, player2);
-
-            System.out.println(player1 +" turn");
-            player1Attack(player1);
-            displayBothBoards(player1, player2);
-
-            System.out.println(player2 +" turn");
-            player2Attack(player2);
-            displayBothBoardsInverted(player2, player1);
-
+            playerTwoIsReady = player2SetBoat(player2);
         }
 
+        System.out.println("\nPLAYERS STATUS:");
+        System.out.println("Player 1 is ready? : " + playerOneIsReady);
+        System.out.println("Player 2 is ready? : " + playerTwoIsReady);
 
-
+        game(player1, player2);
     }
-    static boolean areAllBoatsDestroyedPlayer1() {
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions[i].length; j++) {
-                if (NavalBattle.positions[i][j] != null && NavalBattle.positions[i][j].field.equals(" 🔥")) {
-                    return false;
-                } else if (NavalBattle.positions[i][j] != null && NavalBattle.positions[i][j].field.equals(" ☠️")){
-                    return true;
-                }
+
+    static void game(String player1, String player2) throws InterruptedException {
+        System.out.print(Colors.BLUE + "STARTING GAME.");
+        Thread.sleep(1000);
+        System.out.print(".");
+        Thread.sleep(1000);
+        System.out.println("." + Colors.RESET);
+        Thread.sleep(1000);
+
+        while (!gameOver) {
+            System.out.println(player1 + " Attacking");
+            playerAttack(player1, player2);
+
+            if (checkWinPlayer()) {
+                System.out.print(Colors.BLUE + "Checking board.");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.println("." + Colors.RESET);
+                Thread.sleep(500);
+                gameOver = true;
+                gameOver(player1);
+            }
+
+            System.out.println("\n\n\n\n\n\n\n\n\n");
+            System.out.println(player2 + " Attacking");
+            player2Attack(player1, player2);
+
+            if (checkWinCPU()) {
+                System.out.print(Colors.BLUE + "Checking board.");
+                Thread.sleep(500);
+                System.out.print(".");
+                Thread.sleep(500);
+                System.out.println("." + Colors.RESET);
+                Thread.sleep(500);
+                gameOver = true;
+                gameOver(player2);
             }
         }
-        return false;
     }
-    static boolean areAllBoatsDestroyedPlayer2() {
+
+    static boolean checkWinPlayer() {
         for (int i = 0; i < NavalBattle.positions1.length; i++) {
             for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
-                if (NavalBattle.positions1[i][j] != null && NavalBattle.positions1[i][j].field.equals(" 🔥")) {
+                if (NavalBattle.positions1[i][j].boat != null && !NavalBattle.positions1[i][j].hit) {
                     return false;
-                }  else if (NavalBattle.positions1[i][j] != null && NavalBattle.positions1[i][j].field.equals(" ☠️")){
-                    return true;
                 }
             }
         }
-        return false;
+        return true;
     }
 
-    static void player1Attack(String player) {
-        int y = 0;
-        int newX = 0;
-        int boatLifePlayer2 = 4;
-
-        while (boatLifePlayer2 > 0) {
-            System.out.print("Set the X: ");
-            String x = sc.next();
-            newX = convertToLetter(x);
-
-            System.out.print("Set the Y: ");
-            y = sc.nextInt();
-            boolean boatExistsPlayer1 = existsBoat(NavalBattle.positions1, y, newX);
-
-            if(NavalBattle.positions1[y][newX].boat != null) {
-                boatLifePlayer2 = NavalBattle.positions1[y][newX].getBoat().getLife();
-            }
-            if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" 🔥")) {
-                System.out.println("You already shot this boat... Try Again!");
-            } else if (boatExistsPlayer1 && NavalBattle.positions1[y][newX].getField().equals(" ☠️")) {
-                System.out.println("The boat is already down");
-            }
-
-            if (boatExistsPlayer1) {
-                    NavalBattle.positions1[y][newX].boat.getHit();
-            } else {
-                System.out.println("Missed!");
-                NavalBattle.positions1[y][newX].setField(" 💧");
+    static boolean checkWinCPU() {
+        for (int i = 0; i < NavalBattle.positions.length; i++) {
+            for (int j = 0; j < NavalBattle.positions[i].length; j++) {
+                if (NavalBattle.positions[i][j].boat != null && !NavalBattle.positions[i][j].hit) {
+                    return false;
+                }
             }
         }
+        return true;
+    }
 
+    static void playerAttack(String player1, String player2) {
+        NavalBattle.printBothFakeBoards(player1, player2);
+
+        Scanner sc = new Scanner(System.in);
+
+        System.out.println("Enter the coordinates to attack:");
+        System.out.print("X: ");
+        String x = sc.next();
+        int newX = convertToLetter(x);
+        System.out.print("Y: ");
+        int y = sc.nextInt();
+        int newY = y - 1;
+
+        boolean existsBoatInCPUBoard = existsBoatInCPUBoard(newY, newX);
+
+        if (existsBoatInCPUBoard) {
+            NavalBattle.positions1[newY][newX].hit = true;
+            NavalBattle.fakeCPUField[newY][newX].field = " 🔥";
+
+            Boat hitBoat = NavalBattle.positions1[newY][newX].boat;
+
+            if (hitBoat.getLifeCPUBoard() > 0) {
+                hitBoat.setLifeCPUBoard(hitBoat.getLifeCPUBoard() - 1);
+            }
+            if (checkWholeShipHitCPU(hitBoat)) {
+                changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
+            }
+
+        } else {
+            NavalBattle.fakeCPUField[newY][newX].field = " 💧";
+        }
     }
 
 
+    static void player2Attack(String player1, String player2) {
+        NavalBattle.printBothFakeBoardsInverted(player2, player1);
+        Scanner sc = new Scanner(System.in);
 
-    static void player2Attack(String player){
-        int y = 0;
-        int newX = 0;
-        int boatLifePlayer1 = 4;
+        System.out.println("Enter the coordinates to attack:");
+        System.out.print("X: ");
+        String x = sc.next();
+        int newX = convertToLetter(x);
+        System.out.print("Y: ");
+        int y = sc.nextInt();
+        int newY = y - 1;
 
-        while (boatLifePlayer1 > 0) {
-            System.out.print("Set the X: ");
-            String x = sc.next();
-            newX = convertToLetter(x)-1;
+        boolean existsBoatInPlayerBoard = existsBoatInPlayerBoard(newY, newX);
 
-            System.out.print("Set the Y: ");
-            y = sc.nextInt();
-            boolean boatExistsPlayer = existsBoat(NavalBattle.positions, y, newX);
+        if (existsBoatInPlayerBoard) {
+            NavalBattle.positions[newY][newX].hit = true;
+            NavalBattle.fakePlayerField[newY][newX].field = " 🔥";
 
-            if(NavalBattle.positions[y][newX].boat != null) {
-                boatLifePlayer1 = NavalBattle.positions[y][newX].boat.getLife();
+            Boat hitBoat = NavalBattle.positions[newY][newX].boat;
+
+            if (hitBoat.getLifePlayerBoard() > 0) {
+                hitBoat.setLifePlayerBoard(hitBoat.getLifePlayerBoard() - 1);
             }
-            if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" 🔥")) {
-                System.out.println("You already shot this boat... Try Again!");
-            } else if (boatExistsPlayer && NavalBattle.positions[y][newX].getField().equals(" ☠️")) {
-                System.out.println("The boat is already down");
+            if (checkWholeShipHitPlayer(hitBoat)) {
+                changeEmojiInFakeBoard(NavalBattle.fakePlayerField, NavalBattle.positions, hitBoat);
             }
 
-            if (boatExistsPlayer) {
-                NavalBattle.positions[y][newX].boat.getHit();
+        } else {
+            NavalBattle.fakePlayerField[newY][newX].field = " 💧";
+        }
+    }
 
-            } else {
-                System.out.println("Missed!");
-                NavalBattle.positions[y][newX].field = " 💧";
+    private static boolean checkWholeShipHitPlayer(Boat boat) {
+        return boat.getLifePlayerBoard() == 0;
+    }
+    private static boolean checkWholeShipHitCPU(Boat boat) {
+        return boat.getLifeCPUBoard() == 0;
+    }
 
+    private static void changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
+        String boatSymbol = boat.getSymbol();
+        for (int i = 0; i < cpuBoard.length; i++) {
+            for (int j = 0; j < cpuBoard[i].length; j++) {
+                if (cpuBoard[i][j].boat != null && cpuBoard[i][j].boat.getSymbol().equals(boatSymbol) && cpuBoard[i][j].hit) {
+                    fakeBoard[i][j].field = " ☠️";
+                }
             }
         }
-
-
     }
 
+    static void gameOver(String player) throws InterruptedException {
+        System.out.println("Nice one! You won " + player);
+        Thread.sleep(2000);
+        System.exit(0);
+    }
 
+    static boolean existsBoatInPlayerBoard(int x, int y) {
+        return NavalBattle.positions[x][y].boat != null;
+    }
 
-
+    static boolean existsBoatInCPUBoard(int x, int y) {
+        return NavalBattle.positions1[x][y].boat != null;
+    }
 
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
@@ -197,6 +239,7 @@ public class PvP {
         }
         return true;
     }
+
     private static boolean canInsertBoatPlayer2(int startY, int startX, int size, String direction) {
         int y = startY;
         int x = startX;
@@ -270,48 +313,63 @@ public class PvP {
         }
     }
 
+    private static boolean player1SetBoat(String player1) {
+
+        CreativeMode.seeListsPvC();
 
 
-    private static void player1SetBoat(String player) {
+        NavalBattle.printPlayer1Board(player1);
 
         for (int i = 0; i < BoatList.list.size(); i++) {
-            displayBoard1(player);
-            System.out.println("Position boat: " + BoatList.list.get(i).getName());
-            System.out.println("Set the X: ");
+
+            System.out.println("\nPosition: " + BoatList.list.get(i).getName());
+
+            System.out.print("Set the X: ");
+
             String x = sc.next();
             int newX = convertToLetter(x);
 
-            System.out.println("Set the Y: ");
+            System.out.print("Set the Y: ");
             int newY = sc.nextInt();
 
             setDirectionOfBoatAndInsertPlayer1(newY - 1, newX, BoatList.list.get(i));
+            NavalBattle.printPlayer1Board(player1);
         }
 
+        return true;
     }
 
-    private static void player2SetBoat(String player) {
+    private static boolean player2SetBoat( String player2) {
+        CreativeMode.seeListsPvC();
 
+
+        NavalBattle.printPlayer2Board(player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
-            displayBoard2(player);
-            System.out.println("Position boat: " + BoatList.list.get(i).getName());
-            System.out.println("Set the X: ");
+
+            System.out.println("\nPosition: " + BoatList.list.get(i).getName());
+
+            System.out.print("Set the X: ");
+
             String x = sc.next();
             int newX = convertToLetter(x);
 
-            System.out.println("Set the Y: ");
+            System.out.print("Set the Y: ");
             int newY = sc.nextInt();
 
-            setDirectionOfBoatAndInsert2(newY - 1, newX, BoatList.list.get(i));
+            setDirectionOfBoatAndInsertPlayer2(newY - 1, newX, BoatList.list.get(i));
+            NavalBattle.printPlayer2Board(player2);
+
         }
 
+        return true;
 
     }
 
+    private static void setDirectionOfBoatAndInsertPlayer2(int y, int x, Boat boat) {
 
-    private static void setDirectionOfBoatAndInsert2(int y, int x , Boat boat) {
         boolean successfullyInserted = false;
 
-        while (!successfullyInserted){
+        while (!successfullyInserted) {
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
             String direction = sc.next().toLowerCase();
             boolean canInsertBoat = canInsertBoatPlayer2(y, x, boat.getSize(), direction);
@@ -371,55 +429,3 @@ public class PvP {
         return -1;
     }
 
-
-    static void checkNullTemporary(){
-        for (int i = 0; i <NavalBattle.positions1.length ; i++) {
-            for (int j = 0; j <NavalBattle.positions1.length ; j++) {
-                System.out.println(NavalBattle.positions1[i][j].boat);
-
-            }
-
-        }
-    }
-    private static void displayBoard1(String player1) {
-
-        NavalBattle.printPlayer1Board(player1);
-    }
-    private static void displayBoard2(String player1) {
-
-        NavalBattle.printPlayer2Board(player1);
-    }
-    private static void displayBothBoards(String player1, String player2){
-
-        NavalBattle.printBothBoards(player1,player2);
-    }
-
-    private static void displayBothBoardsInverted(String player1, String player2){
-        NavalBattle.printBothBoardsInvered(player1,player2);
-    }
-
-
-    private static void hideBoatsPlayers(String player1,String player2){
-        for (int i = 0; i < NavalBattle.positions.length; i++) {
-            for (int j = 0; j < NavalBattle.positions[i].length; j++) {
-                if (NavalBattle.positions[i][j].getBoat()!=null){
-                    NavalBattle.positions[i][j].setField(" ▪️");
-                }
-            }
-        }
-        for (int i = 0; i < NavalBattle.positions1.length; i++) {
-            for (int j = 0; j < NavalBattle.positions1[i].length; j++) {
-                if (NavalBattle.positions1[i][j].getBoat() !=null){
-                    NavalBattle.positions1[i][j].setField(" ▪️");
-                }
-            }
-        }
-
-    }
-    static boolean existsBoat(PositionField[][] positions, int x, int y) {
-        return positions[x][y].boat != null;
-    }
-
-
-
-}
