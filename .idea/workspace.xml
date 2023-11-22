@@ -4,7 +4,12 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="" />
+    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/Assets/Logo.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Assets/Logo.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/NavalBattle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NavalBattle.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/PvC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PvC.java" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -23,22 +28,22 @@
   <component name="MarkdownSettingsMigration">
     <option name="stateVersion" value="1" />
   </component>
-  <component name="ProjectColorInfo"><![CDATA[{
-  "associatedIndex": 3
-}]]></component>
+  <component name="ProjectColorInfo">{
+  &quot;associatedIndex&quot;: 3
+}</component>
   <component name="ProjectId" id="2YFkGomYd4aJ3g05SlN5IR5qCKX" />
   <component name="ProjectViewState">
     <option name="hideEmptyMiddlePackages" value="true" />
     <option name="showLibraryContents" value="true" />
   </component>
-  <component name="PropertiesComponent"><![CDATA[{
-  "keyToString": {
-    "RunOnceActivity.OpenProjectViewOnStart": "true",
-    "RunOnceActivity.ShowReadmeOnStart": "true",
-    "git-widget-placeholder": "pvc2.0",
-    "last_opened_file_path": "/Users/mindera/Documents/School/others/Naval-Battle"
+  <component name="PropertiesComponent">{
+  &quot;keyToString&quot;: {
+    &quot;RunOnceActivity.OpenProjectViewOnStart&quot;: &quot;true&quot;,
+    &quot;RunOnceActivity.ShowReadmeOnStart&quot;: &quot;true&quot;,
+    &quot;git-widget-placeholder&quot;: &quot;pvc2.0&quot;,
+    &quot;last_opened_file_path&quot;: &quot;/Users/mindera/Documents/School/others/Naval-Battle&quot;
   }
-}]]></component>
+}</component>
   <component name="RunManager">
     <configuration name="Main" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="Main" />

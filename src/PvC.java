@@ -1,6 +1,7 @@
 import Assets.Colors;
 import Boats.Boat;
 
+import java.io.IOException;
 import java.util.Scanner;
 
 public class PvC {
@@ -9,7 +10,7 @@ public class PvC {
     BoatList boatlist = CreativeMode.lists.get(0);
     private static boolean gameOver;
 
-    static void start(String player1, String player2) throws InterruptedException {
+    static void start(String player1, String player2) throws InterruptedException, IOException {
         loadingBar(3, "LOADING GAME...");
 
         NavalBattle.printBothBoards(player1, player2);
@@ -26,7 +27,7 @@ public class PvC {
         setPlayersBoats(player1, player2);
     }
 
-    static void setPlayersBoats(String player1, String player2) throws InterruptedException {
+    static void setPlayersBoats(String player1, String player2) throws InterruptedException, IOException {
         boolean playerOneIsReady = false;
         boolean playerTwoIsReady = false;
         while (!(playerOneIsReady && playerTwoIsReady)) {
@@ -46,9 +47,6 @@ public class PvC {
             Thread.sleep(1000);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             playerTwoIsReady = player2SetBoat();
-
-            //NavalBattle.printPlayer2Board(player2);
-
         }
 
         System.out.println("\nPLAYERS STATUS:");
@@ -58,7 +56,7 @@ public class PvC {
         game(player1, player2);
     }
 
-    static void game(String player1, String player2) throws InterruptedException {
+    static void game(String player1, String player2) throws InterruptedException, IOException {
         System.out.print(Colors.BLUE + "STARTING GAME.");
         Thread.sleep(1000);
         System.out.print(".");
@@ -236,14 +234,34 @@ public class PvC {
         return emojisChanged;
     }
 
-    static void gameOver(String player) throws InterruptedException {
+    static void gameOver(String player) throws InterruptedException, IOException {
         if (player.equals("CPU")) {
-            System.out.println("\nYou lost! CPU is the winner...");
+            System.out.println("\n" + Colors.RED +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t▄██   ▄    ▄██████▄  ███    █▄        ▄█        ▄██████▄     ▄████████     ███     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t███   ██▄ ███    ███ ███    ███      ███       ███    ███   ███    ███ ▀█████████▄ \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t███▄▄▄███ ███    ███ ███    ███      ███       ███    ███   ███    █▀     ▀███▀▀██ \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t▀▀▀▀▀▀███ ███    ███ ███    ███      ███       ███    ███   ███            ███   ▀ \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t▄██   ███ ███    ███ ███    ███      ███       ███    ███ ▀███████████     ███     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t███   ███ ███    ███ ███    ███      ███       ███    ███          ███     ███     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t███   ███ ███    ███ ███    ███      ███▌    ▄ ███    ███    ▄█    ███     ███     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t ▀█████▀   ▀██████▀  ████████▀       █████▄▄██  ▀██████▀   ▄████████▀     ▄████▀   \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                     ▀                                             \n" + Colors.RESET);
         } else {
-            System.out.println("\nNice one " + player + "! You are the winner...");
+            System.out.println("\n" + Colors.YELLOW +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  ___    ___ ________  ___  ___          ___       __   ________  ________   ___       \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t |\\  \\  /  /|\\   __  \\|\\  \\|\\  \\        |\\  \\     |\\  \\|\\   __  \\|\\   ___  \\|\\  \\      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \\ \\  \\/  / | \\  \\|\\  \\ \\  \\\\\\  \\       \\ \\  \\    \\ \\  \\ \\  \\|\\  \\ \\  \\\\ \\  \\ \\  \\     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  \\ \\    / / \\ \\  \\\\\\  \\ \\  \\\\\\  \\       \\ \\  \\  __\\ \\  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\  \\    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   \\/  /  /   \\ \\  \\\\\\  \\ \\  \\\\\\  \\       \\ \\  \\|\\__\\_\\  \\ \\  \\\\\\  \\ \\  \\\\ \\  \\ \\__\\   \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t __/  / /      \\ \\_______\\ \\_______\\       \\ \\____________\\ \\_______\\ \\__\\\\ \\__\\|__|   \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|\\___/ /        \\|_______|\\|_______|        \\|____________|\\|_______|\\|__| \\|__|   ___ \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\\|___|/                                                                           |\\__\\\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                  \\|__|\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                       \n" + Colors.RESET);
         }
-        Thread.sleep(2000);
-        System.exit(0);
+        Thread.sleep(5000);
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+        NavalBattle.menu();
     }
 
     static boolean existsBoatInPlayerBoard(int x, int y) {

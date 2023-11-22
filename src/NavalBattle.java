@@ -9,7 +9,6 @@ import java.util.Scanner;
 
 public class NavalBattle {
     static int option = -10;
-    static String player1, player2;
     static Scanner sc = new Scanner(System.in);
 
     static PositionField[][] positions = new PositionField[9][9];
@@ -26,13 +25,7 @@ public class NavalBattle {
         ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(), new MediumBoat(), new BigBoat()));
         new BoatList(classic, Colors.CYAN + "Classic" + Colors.RESET);
 
-        System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
         Thread.sleep(1000);
-        System.out.print(" !");
-        Thread.sleep(1000);
-        System.out.println(" !" + Colors.RESET);
-        Thread.sleep(1000);
-
         //Logo.logoCinematic();
         menu();
     }
@@ -41,11 +34,32 @@ public class NavalBattle {
     public static void menu() throws InterruptedException, IOException {
 
         while (option != 0) {
-            Thread.sleep(1500);
-            System.out.print(
-                    "\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    1-Play\n" +
-                            "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    0-Exit\n\n" +
-                            Colors.YELLOW + "Option:" + Colors.RESET);
+            Thread.sleep(500);
+            System.out.println("\n" + Colors.PURPLE +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$  /$$                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$| $$                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$| $$  /$$$$$$  /$$   /$$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/| $$ |____  $$| $$  | $$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/ | $$  /$$$$$$$| $$  | $$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$                      | $$      | $$ /$$__  $$| $$  | $$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$      | $$|  $$$$$$$|  $$$$$$$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|______/                    |__/      |__/ \\_______/ \\____  $$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                     /$$  | $$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                    |  $$$$$$/  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                     \\______/   \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$$           /$$   /$$    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$__  $$                    | $$_____/          |__/  | $$    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$       /$$   /$$ /$$ /$$$$$$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$/       /$$$$$$      | $$$$$   |  $$ /$$/| $$|_  $$_/  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$____/       |______/      | $$__/    \\  $$$$/ | $$  | $$    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$                          | $$        >$$  $$ | $$  | $$ /$$\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$$$$$$$                    | $$$$$$$$ /$$/\\  $$| $$  |  $$$$/\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|________/                    |________/|__/  \\__/|__/   \\___/  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" + Colors.RESET);
+
+            System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t=> ");
             option = sc.nextInt();
             switch (option) {
                 case 1:
@@ -65,12 +79,50 @@ public class NavalBattle {
         Scanner sc = new Scanner(System.in);
         String player1;
         String player2;
-        System.out.print(
-                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t1-Player👤 VS 👤Player\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t2-Player👤 VS 💻CPU\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t3- ✏️Creation Mode✏️\n" +
-                        "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t0-Back\n" +
-                        Colors.YELLOW + "Option:" + Colors.RESET);
+        System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + Colors.PURPLE +
+                "\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$             /$$$$$$$                                                                                               \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$           | $$__  $$                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$ /$$    /$$| $$  \\ $$                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/|  $$  /$$/| $$$$$$$/                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/  \\  $$/$$/ | $$____/                                                                                               \n" +
+                "\t\t\t\t\t\t\t\t\t\t  | $$                      | $$        \\  $$$/  | $$                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$         \\  $/   | $$                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t|______/                    |__/          \\_/    |__/                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$              /$$$$$$                                                                                             \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$__  $$                    | $$__  $$            /$$__  $$                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$  \\ $$ /$$    /$$| $$  \\__/                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$/       /$$$$$$      | $$$$$$$/|  $$  /$$/| $$                                                                                                  \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$____/       |______/      | $$____/  \\  $$/$$/ | $$                                                                                                  \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$                          | $$        \\  $$$/  | $$    $$                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$$$$$$$                    | $$         \\  $/   |  $$$$$$/                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t|________/                    |__/          \\_/     \\______/                                                                                             \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                       /$$$$$$                                  /$$     /$$                           /$$      /$$                 /$$          \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$__  $$                     /$$__  $$                                | $$    |__/                          | $$$    /$$$                | $$          \n" +
+                "\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$   /$$  /$$$$$$  /$$$$$$$       | $$$$  /$$$$  /$$$$$$   /$$$$$$$  /$$$$$$ \n" +
+                "\t\t\t\t\t\t\t\t\t\t   /$$$$$/       /$$$$$$      | $$       /$$__  $$ /$$__  $$ |____  $$|_  $$_/  | $$ /$$__  $$| $$__  $$      | $$ $$/$$ $$ /$$__  $$ /$$__  $$ /$$__  $$\n" +
+                "\t\t\t\t\t\t\t\t\t\t  |___  $$      |______/      | $$      | $$  \\__/| $$$$$$$$  /$$$$$$$  | $$    | $$| $$  \\ $$| $$  \\ $$      | $$  $$$| $$| $$  \\ $$| $$  | $$| $$$$$$$$\n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$  \\ $$                    | $$    $$| $$      | $$_____/ /$$__  $$  | $$ /$$| $$| $$  | $$| $$  | $$      | $$\\  $ | $$| $$  | $$| $$  | $$| $$_____/\n" +
+                "\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    |  $$$$$$/| $$      |  $$$$$$$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$      | $$ \\/  | $$|  $$$$$$/|  $$$$$$$|  $$$$$$$\n" +
+                "\t\t\t\t\t\t\t\t\t\t \\______/                      \\______/ |__/       \\_______/ \\_______/   \\___/  |__/ \\______/ |__/  |__/      |__/     |__/ \\______/  \\_______/ \\_______/\n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$                      /$$                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t /$$$_  $$                    | $$__  $$                    | $$                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$$$\\ $$                    | $$  \\ $$  /$$$$$$   /$$$$$$$| $$   /$$                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$ $$ $$       /$$$$$$      | $$$$$$$  |____  $$ /$$_____/| $$  /$$/                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$\\ $$$$      |______/      | $$__  $$  /$$$$$$$| $$      | $$$$$$/                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t| $$ \\ $$$                    | $$  \\ $$ /$$__  $$| $$      | $$_  $$                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    | $$$$$$$/|  $$$$$$$|  $$$$$$$| $$ \\  $$                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t \\______/                     |_______/  \\_______/ \\_______/|__/  \\__/                                                                                   \n" +
+                "                                                                                                                                                                                    \n" + Colors.RESET);
+        System.out.print("\t=> ");
         option = sc.nextInt();
         sc.nextLine();
         switch (option) {
@@ -86,7 +138,9 @@ public class NavalBattle {
                 PvP.start(player1, player2);
                 break;
             case 2:
-                System.out.print("Player: ");
+                System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+                System.out.println("INSERT YOUR NICKNAME");
+                System.out.print("=> ");
                 player1 = sc.nextLine();
                 player2 = "CPU";
                 PvC.start(player1, player2);
