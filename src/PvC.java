@@ -10,7 +10,10 @@ public class PvC {
     private static boolean gameOver;
 
     static void start(String player1, String player2) throws InterruptedException {
+        loadingBar(3, "LOADING GAME...");
+
         NavalBattle.printBothBoards(player1, player2);
+
         Thread.sleep(2500);
         System.out.print("\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "LOADING TO SET " + player1 + " BOATS.");
         Thread.sleep(1000);
@@ -43,7 +46,9 @@ public class PvC {
             Thread.sleep(1000);
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             playerTwoIsReady = player2SetBoat();
-            NavalBattle.printPlayer2Board(player2);
+
+            //NavalBattle.printPlayer2Board(player2);
+
         }
 
         System.out.println("\nPLAYERS STATUS:");
@@ -84,9 +89,6 @@ public class PvC {
                 gameOver(player1);
             }
 
-            loadingBar(5);
-
-            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
             System.out.print(Colors.BLUE + "CPU ATTACKING.");
             Thread.sleep(1000);
             System.out.print(".");
@@ -107,7 +109,7 @@ public class PvC {
                 gameOver(player2);
             }
 
-            loadingBar(5);
+            loadingBar(5, "DISPLAYING BOARD...");
         }
     }
 
@@ -162,7 +164,9 @@ public class PvC {
         } else {
             NavalBattle.fakeCPUField[newY][newX].field = " 💧";
         }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         NavalBattle.printBothFakeBoards(player1, player2);
+        loadingBar(5, "DISPLAYING BOARD...");
     }
 
     static void cpuAttack(String player1, String player2) {
@@ -191,12 +195,15 @@ public class PvC {
         } else {
             NavalBattle.fakePlayerField[newY][newX].field = " 💧";
         }
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         NavalBattle.printBothFakeBoards(player1, player2);
+        loadingBar(5, "DISPLAYING BOARD...");
     }
 
     private static boolean checkWholeShipHitPlayer(Boat boat) {
         return boat.getLifePlayerBoard() == 0;
     }
+
     private static boolean checkWholeShipHitCPU(Boat boat) {
         return boat.getLifeCPUBoard() == 0;
     }
@@ -267,6 +274,7 @@ public class PvC {
         boolean successfullyInserted = false;
         while (!successfullyInserted) {
             System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
+            System.out.print("=> ");
             String direction = sc.next().toLowerCase();
             boolean canInsertBoat = canInsertBoatPlayer1(y, x, boat.getSize(), direction);
 
@@ -274,7 +282,7 @@ public class PvC {
                 insertBoatInDirectionInPlayerBoard(y, x, boat, direction);
                 successfullyInserted = true;
             } else {
-                System.out.println(Colors.RED + "Não é possível inserir o barco nessa posição, por favor, escolha novas coordenadas." + Colors.RESET);
+                System.out.println(Colors.RED + "Unable to place the boat in this position! Please choose new coordinates." + Colors.RESET);
                 System.out.print("Set the X: ");
                 String newX = sc.next();
                 x = convertToNumber(newX);
@@ -370,7 +378,6 @@ public class PvC {
                 insertBoatInDirectionInCPUBoard(y, x, boat, direction);
                 successfullyInserted = true;
             } else {
-                // Se não puder inserir o barco nessa direção, gera novas coordenadas
                 x = (int) (Math.random() * 9);
                 y = (int) (Math.random() * 9);
             }
@@ -460,14 +467,13 @@ public class PvC {
         return -1;
     }
 
-    public static void loadingBar(int seconds) {
+    public static void loadingBar(int seconds, String message) {
         int totalProgress = 100;
         int barLength = 50;
         int progress = 0;
-        int displayTimeInSeconds = seconds;
         long startTime = System.currentTimeMillis();
 
-        System.out.println("\nDisplaying board for " + displayTimeInSeconds + " seconds...");
+        System.out.println("\n" + message);
 
         while (progress <= totalProgress) {
             long elapsedTime = System.currentTimeMillis() - startTime;
@@ -492,11 +498,11 @@ public class PvC {
             System.out.print("\r" + progressBar + " - Estimated: " + estimatedTimeRemaining + "s remaining");
 
             try {
-                Thread.sleep(10);
+                Thread.sleep(30);
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
         }
-        System.out.println();
+        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
     }
 }

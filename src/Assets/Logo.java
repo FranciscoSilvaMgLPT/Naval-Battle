@@ -122,6 +122,18 @@ public class Logo {
             "\t\t\t\t\t\t\t\t\t\t\t💣💣  ╚═╝░░╚══╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝╚══════╝  ╚═════╝░╚═╝░░╚═╝░░░╚═╝░░░░░░╚═╝░░░╚══════╝╚══════╝  💣💣" + Colors.RESET+
             "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";;
 
+    static String logoTeste = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + Colors.GREEN +
+            " __    __                                              __     \n" +
+            "/\\ \\  /\\ \\                                            /\\ \\    \n" +
+            "\\ `\\`\\\\/'/ ___   __  __      __  __  __    ___     ___\\ \\ \\   \n" +
+            " `\\ `\\ /' / __`\\/\\ \\/\\ \\    /\\ \\/\\ \\/\\ \\  / __`\\ /' _ `\\ \\ \\  \n" +
+            "   `\\ \\ \\/\\ \\L\\ \\ \\ \\_\\ \\   \\ \\ \\_/ \\_/ \\/\\ \\L\\ \\/\\ \\/\\ \\ \\_\\ \n" +
+            "     \\ \\_\\ \\____/\\ \\____/    \\ \\___x___/'\\ \\____/\\ \\_\\ \\_\\/\\_\\\n" +
+            "      \\/_/\\/___/  \\/___/      \\/__//__/   \\/___/  \\/_/\\/_/\\/_/\n" +
+            "                                                               \n" +
+            "                                                               " + Colors.RESET +
+            "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n";
+
     static String[] logos = new String[]{logo1,logo2,logo3,logo4,logo5,logo6,logo7,logo8,logo9,logo10,logo11,logo12,logoFinal};
 
     public static void logoCinematic() throws InterruptedException{
@@ -135,5 +147,4 @@ public class Logo {
             }
         }
     }
-
 }
