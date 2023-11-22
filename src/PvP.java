@@ -1,12 +1,12 @@
 import Assets.Colors;
 import Boats.Boat;
-
 import java.util.Scanner;
 
 public class PvP {
 
     static Scanner sc = new Scanner(System.in);
     BoatList boatlist = CreativeMode.lists.get(0);
+
     private static boolean gameOver;
 
     static void start(String player1, String player2) throws InterruptedException {
@@ -28,6 +28,7 @@ public class PvP {
         boolean playerTwoIsReady = false;
         while (!(playerOneIsReady && playerTwoIsReady)) {
             playerOneIsReady = player1SetBoat(player1);
+
 
             System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
 
@@ -136,6 +137,7 @@ public class PvP {
         }
     }
 
+
     static void player2Attack(String player1, String player2) {
         NavalBattle.printBothFakeBoardsInverted(player2, player1);
         Scanner sc = new Scanner(System.in);
@@ -199,6 +201,7 @@ public class PvP {
     static boolean existsBoatInCPUBoard(int x, int y) {
         return NavalBattle.positions1[x][y].boat != null;
     }
+
 
     private static boolean canInsertBoatPlayer1(int startY, int startX, int size, String direction) {
         int y = startY;
@@ -314,6 +317,7 @@ public class PvP {
 
         CreativeMode.seeListsPvC();
 
+
         NavalBattle.printPlayer1Board(player1);
 
         for (int i = 0; i < BoatList.list.size(); i++) {
@@ -321,6 +325,7 @@ public class PvP {
             System.out.println("\nPosition: " + BoatList.list.get(i).getName());
 
             System.out.print("Set the X: ");
+
             String x = sc.next();
             int newX = convertToLetter(x);
 
@@ -337,12 +342,14 @@ public class PvP {
     private static boolean player2SetBoat( String player2) {
         CreativeMode.seeListsPvC();
 
+
         NavalBattle.printPlayer2Board(player2);
         for (int i = 0; i < BoatList.list.size(); i++) {
 
             System.out.println("\nPosition: " + BoatList.list.get(i).getName());
 
             System.out.print("Set the X: ");
+
             String x = sc.next();
             int newX = convertToLetter(x);
 
@@ -421,4 +428,4 @@ public class PvP {
         }
         return -1;
     }
-}
+

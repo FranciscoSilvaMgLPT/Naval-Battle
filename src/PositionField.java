@@ -25,4 +25,7 @@ public class PositionField {
         this.boat=boat;
     }
 
+    public void setField(String field) {
+        this.field = field;
+    }
 }

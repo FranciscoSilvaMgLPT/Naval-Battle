@@ -39,6 +39,7 @@ public abstract class Boat {
         this.symbol = symbol;
     }
 
+
     public int getLifePlayerBoard() {
         return lifePlayerBoard;
     }
@@ -53,5 +54,20 @@ public abstract class Boat {
 
     public void setLifeCPUBoard(int lifeCPUBoard) {
         this.lifeCPUBoard = lifeCPUBoard;
+
+    public int getLife() {
+        return life;
     }
+
+    public void setLife(int life) {
+        this.life = life;
+    }
+
+    public void getHit(){
+        life--;
+        symbol=" 🔥";
+        if(life==0){
+            symbol=" ☠️";
+        }
+
 }
