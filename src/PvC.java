@@ -38,7 +38,7 @@ public class PvC {
             Thread.sleep(1000);
             System.out.println("." + Colors.RESET);
             Thread.sleep(1000);
-            System.out.print("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "PREPARING TERRITORY.");
+            System.out.print("\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    " + Colors.BLUE + "PREPARING CPU TERRITORY.");
             Thread.sleep(1000);
             System.out.print(".");
             Thread.sleep(1000);
@@ -108,8 +108,6 @@ public class PvC {
                 gameOver = true;
                 gameOver(player2);
             }
-
-            loadingBar(5, "DISPLAYING BOARD...");
         }
     }
 
@@ -138,13 +136,19 @@ public class PvC {
     static void playerAttack(String player1, String player2) {
         Scanner sc = new Scanner(System.in);
 
-        System.out.println("Enter the coordinates to attack:");
+        System.out.println("\nEnter the coordinates to attack:");
         System.out.print("X: ");
         String x = sc.next();
         int newX = convertToNumber(x);
         System.out.print("Y: ");
         int y = sc.nextInt();
         int newY = y - 1;
+
+        if (x.equalsIgnoreCase("A") && y == 69) {
+            NavalBattle.printPlayer2Board(player2);
+            playerAttack(player1, player2);
+            return;
+        }
 
         boolean existsBoatInCPUBoard = existsBoatInCPUBoard(newY, newX);
 
@@ -157,16 +161,26 @@ public class PvC {
             if (hitBoat.getLifeCPUBoard() > 0) {
                 hitBoat.setLifeCPUBoard(hitBoat.getLifeCPUBoard() - 1);
             }
+
+            boolean emojisChanged = false;
+
             if (checkWholeShipHitCPU(hitBoat)) {
-                changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
+                emojisChanged = changeEmojiInFakeBoard(NavalBattle.fakeCPUField, NavalBattle.positions1, hitBoat);
             }
+
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            NavalBattle.printBothFakeBoards(player1, player2); // Display boards before the message
+            if (emojisChanged) {
+                System.out.println("\nYou sank a boat! [" + hitBoat.getName() + "]");
+            }
+            loadingBar(5, "DISPLAYING BOARD...");
 
         } else {
             NavalBattle.fakeCPUField[newY][newX].field = " 💧";
+            System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
+            NavalBattle.printBothFakeBoards(player1, player2);
+            loadingBar(5, "DISPLAYING BOARD...");
         }
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
-        NavalBattle.printBothFakeBoards(player1, player2);
-        loadingBar(5, "DISPLAYING BOARD...");
     }
 
     static void cpuAttack(String player1, String player2) {
@@ -195,7 +209,6 @@ public class PvC {
         } else {
             NavalBattle.fakePlayerField[newY][newX].field = " 💧";
         }
-        System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");
         NavalBattle.printBothFakeBoards(player1, player2);
         loadingBar(5, "DISPLAYING BOARD...");
     }
@@ -208,19 +221,27 @@ public class PvC {
         return boat.getLifeCPUBoard() == 0;
     }
 
-    private static void changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
+    private static boolean changeEmojiInFakeBoard(PositionField[][] fakeBoard, PositionField[][] cpuBoard, Boat boat) {
         String boatSymbol = boat.getSymbol();
+        boolean emojisChanged = false;
+
         for (int i = 0; i < cpuBoard.length; i++) {
             for (int j = 0; j < cpuBoard[i].length; j++) {
                 if (cpuBoard[i][j].boat != null && cpuBoard[i][j].boat.getSymbol().equals(boatSymbol) && cpuBoard[i][j].hit) {
                     fakeBoard[i][j].field = " ☠️";
+                    emojisChanged = true;
                 }
             }
         }
+        return emojisChanged;
     }
 
     static void gameOver(String player) throws InterruptedException {
-        System.out.println("Nice one! You won " + player);
+        if (player.equals("CPU")) {
+            System.out.println("\nYou lost! CPU is the winner...");
+        } else {
+            System.out.println("\nNice one " + player + "! You are the winner...");
+        }
         Thread.sleep(2000);
         System.exit(0);
     }
@@ -273,7 +294,7 @@ public class PvC {
     private static void setDirectionOfBoatAndInsertPlayer1(int y, int x, Boat boat) {
         boolean successfullyInserted = false;
         while (!successfullyInserted) {
-            System.out.println("\nPara que direção queres o barco\nW - Cima\nD - Direita\nS - Baixo\nA - Esquerda");
+            System.out.println("\nWhich direction do you want the boat?\nW - Up\nD - Right\nS - Down\nA - Left");
             System.out.print("=> ");
             String direction = sc.next().toLowerCase();
             boolean canInsertBoat = canInsertBoatPlayer1(y, x, boat.getSize(), direction);
