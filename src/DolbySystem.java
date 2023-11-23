@@ -14,6 +14,24 @@ public class DolbySystem {
         clip.start();
     }
 
+    public void player1Sound() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+
+        Clip clip = AudioSystem.getClip();
+        File file = new File("/Users/mindera/Documents/School/NavalBattle/src/Sound/player1Wins.wav");
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        clip.open(audioInputStream);
+        clip.start();
+    }
+    public void player2Sound() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
+
+        Clip clip = AudioSystem.getClip();
+        File file = new File("/Users/mindera/Documents/School/NavalBattle/src/Sound/player2Wins.wav");
+        AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(file);
+        clip.open(audioInputStream);
+        clip.start();
+    }
+
+
     public void bombSound() throws LineUnavailableException, UnsupportedAudioFileException, IOException {
 
         Clip clip = AudioSystem.getClip();

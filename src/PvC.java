@@ -273,6 +273,8 @@ public class PvC {
                     "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    | $$   |  $$$$$$/|  $$$$$$/      | $$/   \\  $$ /$$$$$$| $$ \\  $$\n" +
                     "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t    |__/    \\______/  \\______/       |__/     \\__/|______/|__/  \\__/\n" +
                     "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                    \n" +  Colors.RESET);
+            dolbySystem.youWin();
+            Thread.sleep(2000);
         }
         Thread.sleep(5000);
         System.out.println("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n");

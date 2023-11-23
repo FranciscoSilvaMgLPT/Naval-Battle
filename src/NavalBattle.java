@@ -26,17 +26,14 @@ public class NavalBattle {
 
         ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(), new MediumBoat(), new BigBoat()));
         new BoatList(classic, Colors.CYAN + "Classic" + Colors.RESET);
-        new DolbySystem().backgroundMusic();
         System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
         Thread.sleep(500);
         System.out.print("!");
         Thread.sleep(500);
         System.out.println("!" + Colors.RESET);
         Thread.sleep(500);
-        ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(), new MediumBoat(), new BigBoat()));
-        new BoatList(classic, Colors.CYAN + "Classic" + Colors.RESET);
         DolbySystem dolbySystem = new DolbySystem();
-        dolbySystem.backgroundMusicCinematic();
+       //dolbySystem.backgroundMusicCinematic();
         menu();
     }
 
