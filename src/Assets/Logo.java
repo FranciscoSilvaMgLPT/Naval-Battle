@@ -2,6 +2,10 @@ package Assets;
 
 import Assets.Colors;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
+import java.io.IOException;
+
 public class Logo {
 
     static String logo1 = "\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + Colors.PURPLE +
@@ -124,9 +128,12 @@ public class Logo {
 
     static String[] logos = new String[]{logo1,logo2,logo3,logo4,logo5,logo6,logo7,logo8,logo9,logo10,logo11,logo12,logoFinal};
 
-    public static void logoCinematic() throws InterruptedException{
+    public static void logoCinematic() throws InterruptedException, UnsupportedAudioFileException, LineUnavailableException, IOException {
 
         for (int i = 0; i < logos.length; i++) {
+            if(i==9){
+                new DolbySystem().bombSound();
+            }
             System.out.println(logos[i]);
             Thread.sleep(1500);
             if(i!=logos.length-1) {

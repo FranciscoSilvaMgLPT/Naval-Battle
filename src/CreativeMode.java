@@ -2,6 +2,8 @@ import Assets.Colors;
 import Boats.Boat;
 import Boats.CreativeBoat;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Scanner;
@@ -9,7 +11,7 @@ import java.util.Scanner;
 public interface CreativeMode {
     ArrayList<BoatList> lists = new ArrayList<>();
 
-    static void start() throws IOException, InterruptedException {
+    static void start() throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
         int option;
         Scanner sc = new Scanner(System.in);
         System.out.println(Colors.PURPLE + "\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  ✏️ CREATION MODE ✏️\n" + Colors.RESET);
@@ -32,7 +34,7 @@ public interface CreativeMode {
         }
     }
 
-    static void lists() throws IOException, InterruptedException {
+    static void lists() throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
         int option;
         Scanner sc = new Scanner(System.in);
         System.out.println("\n\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.PURPLE + "🧾 Lists 🧾\n" + Colors.RESET +
@@ -105,7 +107,7 @@ public interface CreativeMode {
         System.out.println(Colors.GREEN + "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  List created!✅" + Colors.RESET);
     }
 
-    static void createBoat() throws IOException, InterruptedException {
+    static void createBoat() throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
         boolean pass = false;
         int option;
         Scanner sc = new Scanner(System.in);

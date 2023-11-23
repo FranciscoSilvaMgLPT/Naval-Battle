@@ -1,7 +1,9 @@
 import Assets.Colors;
-import Assets.Logo;
+import Assets.DolbySystem;
 import Boats.*;
 
+import javax.sound.sampled.LineUnavailableException;
+import javax.sound.sampled.UnsupportedAudioFileException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -10,60 +12,67 @@ import java.util.Scanner;
 public class NavalBattle {
     static int option = -10;
     static Scanner sc = new Scanner(System.in);
-
+    static boolean playSound = true;
     static PositionField[][] positions = new PositionField[9][9];
     static PositionField[][] positions1 = new PositionField[9][9];
     static PositionField[][] fakePlayerField = new PositionField[9][9];
     static PositionField[][] fakeCPUField = new PositionField[9][9];
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public static void main(String[] args) throws IOException, InterruptedException, UnsupportedAudioFileException, LineUnavailableException {
         start();
     }
 
-    public static void start() throws InterruptedException, IOException {
-
+    public static void start() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
+        System.out.print("\n\n\n\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t" + Colors.BLUE + "Welcome !");
+        Thread.sleep(500);
+        System.out.print("!");
+        Thread.sleep(500);
+        System.out.println("!" + Colors.RESET);
+        Thread.sleep(500);
         ArrayList<Boat> classic = new ArrayList<>(Arrays.asList(new SmallBoat(), new MediumBoat(), new BigBoat()));
         new BoatList(classic, Colors.CYAN + "Classic" + Colors.RESET);
-
-        Thread.sleep(1000);
-        //Logo.logoCinematic();
+        DolbySystem dolbySystem = new DolbySystem();
+        dolbySystem.backgroundMusicCinematic();
         menu();
     }
 
 
-    public static void menu() throws InterruptedException, IOException {
-
+    public static void menu() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
+        DolbySystem dolbySystem = new DolbySystem();
         while (option != 0) {
             Thread.sleep(500);
             System.out.println("\n" + Colors.PURPLE +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$  /$$                      \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$| $$                      \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$| $$  /$$$$$$  /$$   /$$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/| $$ |____  $$| $$  | $$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/ | $$  /$$$$$$$| $$  | $$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$                      | $$      | $$ /$$__  $$| $$  | $$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$      | $$|  $$$$$$$|  $$$$$$$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|______/                    |__/      |__/ \\_______/ \\____  $$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                     /$$  | $$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                    |  $$$$$$/  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                     \\______/   \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$$           /$$   /$$    \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$__  $$                    | $$_____/          |__/  | $$    \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$       /$$   /$$ /$$ /$$$$$$  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$/       /$$$$$$      | $$$$$   |  $$ /$$/| $$|_  $$_/  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$____/       |______/      | $$__/    \\  $$$$/ | $$  | $$    \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$                          | $$        >$$  $$ | $$  | $$ /$$\n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$$$$$$$                    | $$$$$$$$ /$$/\\  $$| $$  |  $$$$/\n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|________/                    |________/|__/  \\__/|__/   \\___/  \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" +
-                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                \n" + Colors.RESET);
-
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$  /$$        /$$$$$$  /$$     /$$\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$| $$       /$$__  $$|  $$   /$$/\n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$| $$      | $$  \\ $$ \\  $$ /$$/ \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/| $$      | $$$$$$$$  \\  $$$$/  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/ | $$      | $$__  $$   \\  $$/   \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$                      | $$      | $$      | $$  | $$    | $$    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$      | $$$$$$$$| $$  | $$    | $$    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|______/                    |__/      |________/|__/  |__/    |__/    \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$$ /$$   /$$ /$$$$$$ /$$$$$$$$  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$_  $$                    | $$_____/| $$  / $$|_  $$_/|__  $$__/  \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$$$\\ $$                    | $$      |  $$/ $$/  | $$     | $$     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$ $$ $$       /$$$$$$      | $$$$$    \\  $$$$/   | $$     | $$     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$\\ $$$$      |______/      | $$__/     >$$  $$   | $$     | $$     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$ \\ $$$                    | $$       /$$/\\  $$  | $$     | $$     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    | $$$$$$$$| $$  \\ $$ /$$$$$$   | $$     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \\______/                     |________/|__/  |__/|______/   |__/     \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" +
+                    "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                      \n" + Colors.RESET);
+            if (playSound) {
+                dolbySystem.chooseOption();
+            }
             System.out.print("\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t=> ");
             option = sc.nextInt();
             switch (option) {
                 case 1:
                     play();
+                    playSound = false;
                     break;
                 case 0:
                     System.out.println("Adios!");
@@ -74,53 +83,44 @@ public class NavalBattle {
         }
     }
 
-    public static void play() throws InterruptedException, IOException {
+    public static void play() throws InterruptedException, IOException, UnsupportedAudioFileException, LineUnavailableException {
+        DolbySystem dolbySystem= new DolbySystem();
+        dolbySystem.backgroundMusic();
         fillBoard();
         Scanner sc = new Scanner(System.in);
         String player1;
         String player2;
         System.out.print("\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n\n" + Colors.PURPLE +
-                "\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$             /$$$$$$$                                                                                               \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$           | $$__  $$                                                                                              \n" +
-                "\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$ /$$    /$$| $$  \\ $$                                                                                              \n" +
-                "\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/|  $$  /$$/| $$$$$$$/                                                                                              \n" +
-                "\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/  \\  $$/$$/ | $$____/                                                                                               \n" +
-                "\t\t\t\t\t\t\t\t\t\t  | $$                      | $$        \\  $$$/  | $$                                                                                                    \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$         \\  $/   | $$                                                                                                    \n" +
-                "\t\t\t\t\t\t\t\t\t\t|______/                    |__/          \\_/    |__/                                                                                                    \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$              /$$$$$$                                                                                             \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$__  $$                    | $$__  $$            /$$__  $$                                                                                            \n" +
-                "\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$  \\ $$ /$$    /$$| $$  \\__/                                                                                            \n" +
-                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$/       /$$$$$$      | $$$$$$$/|  $$  /$$/| $$                                                                                                  \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$____/       |______/      | $$____/  \\  $$/$$/ | $$                                                                                                  \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$                          | $$        \\  $$$/  | $$    $$                                                                                            \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$$$$$$$                    | $$         \\  $/   |  $$$$$$/                                                                                            \n" +
-                "\t\t\t\t\t\t\t\t\t\t|________/                    |__/          \\_/     \\______/                                                                                             \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                       /$$$$$$                                  /$$     /$$                           /$$      /$$                 /$$          \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$__  $$                     /$$__  $$                                | $$    |__/                          | $$$    /$$$                | $$          \n" +
-                "\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$  \\__/  /$$$$$$   /$$$$$$   /$$$$$$  /$$$$$$   /$$  /$$$$$$  /$$$$$$$       | $$$$  /$$$$  /$$$$$$   /$$$$$$$  /$$$$$$ \n" +
-                "\t\t\t\t\t\t\t\t\t\t   /$$$$$/       /$$$$$$      | $$       /$$__  $$ /$$__  $$ |____  $$|_  $$_/  | $$ /$$__  $$| $$__  $$      | $$ $$/$$ $$ /$$__  $$ /$$__  $$ /$$__  $$\n" +
-                "\t\t\t\t\t\t\t\t\t\t  |___  $$      |______/      | $$      | $$  \\__/| $$$$$$$$  /$$$$$$$  | $$    | $$| $$  \\ $$| $$  \\ $$      | $$  $$$| $$| $$  \\ $$| $$  | $$| $$$$$$$$\n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$  \\ $$                    | $$    $$| $$      | $$_____/ /$$__  $$  | $$ /$$| $$| $$  | $$| $$  | $$      | $$\\  $ | $$| $$  | $$| $$  | $$| $$_____/\n" +
-                "\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    |  $$$$$$/| $$      |  $$$$$$$|  $$$$$$$  |  $$$$/| $$|  $$$$$$/| $$  | $$      | $$ \\/  | $$|  $$$$$$/|  $$$$$$$|  $$$$$$$\n" +
-                "\t\t\t\t\t\t\t\t\t\t \\______/                      \\______/ |__/       \\_______/ \\_______/   \\___/  |__/ \\______/ |__/  |__/      |__/     |__/ \\______/  \\_______/ \\_______/\n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$                      /$$                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t /$$$_  $$                    | $$__  $$                    | $$                                                                                         \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$$$\\ $$                    | $$  \\ $$  /$$$$$$   /$$$$$$$| $$   /$$                                                                                   \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$ $$ $$       /$$$$$$      | $$$$$$$  |____  $$ /$$_____/| $$  /$$/                                                                                   \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$\\ $$$$      |______/      | $$__  $$  /$$$$$$$| $$      | $$$$$$/                                                                                    \n" +
-                "\t\t\t\t\t\t\t\t\t\t| $$ \\ $$$                    | $$  \\ $$ /$$__  $$| $$      | $$_  $$                                                                                    \n" +
-                "\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    | $$$$$$$/|  $$$$$$$|  $$$$$$$| $$ \\  $$                                                                                   \n" +
-                "\t\t\t\t\t\t\t\t\t\t \\______/                     |_______/  \\_______/ \\_______/|__/  \\__/                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t   /$$                       /$$$$$$$             /$$$$$$$                                                                                               \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$                      | $$__  $$           | $$__  $$                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|_  $$                      | $$  \\ $$ /$$    /$$| $$  \\ $$                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$         /$$$$$$      | $$$$$$$/|  $$  /$$/| $$$$$$$/                                                                                              \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$        |______/      | $$____/  \\  $$/$$/ | $$____/                                                                                               \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  | $$                      | $$        \\  $$$/  | $$                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$$$$                    | $$         \\  $/   | $$                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|______/                    |__/          \\_/    |__/                                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$              /$$$$$$                                                                                             \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$__  $$                    | $$__  $$            /$$__  $$                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|__/  \\ $$                    | $$  \\ $$ /$$    /$$| $$  \\__/                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$/       /$$$$$$      | $$$$$$$/|  $$  /$$/| $$                                                                                                  \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$____/       |______/      | $$____/  \\  $$/$$/ | $$                                                                                                  \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$                          | $$        \\  $$$/  | $$    $$                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$$$$$$$                    | $$         \\  $/   |  $$$$$$/                                                                                            \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|________/                    |__/          \\_/     \\______/                                                                                             \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t                                                                                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t  /$$$$$$                      /$$$$$$$                      /$$                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t /$$$_  $$                    | $$__  $$                    | $$                                                                                         \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$$$\\ $$                    | $$  \\ $$  /$$$$$$   /$$$$$$$| $$   /$$                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$ $$ $$       /$$$$$$      | $$$$$$$  |____  $$ /$$_____/| $$  /$$/                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$\\ $$$$      |______/      | $$__  $$  /$$$$$$$| $$      | $$$$$$/                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t| $$ \\ $$$                    | $$  \\ $$ /$$__  $$| $$      | $$_  $$                                                                                    \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t|  $$$$$$/                    | $$$$$$$/|  $$$$$$$|  $$$$$$$| $$ \\  $$                                                                                   \n" +
+                "\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t\t \\______/                     |_______/  \\_______/ \\_______/|__/  \\__/                                                                                   \n" +
                 "                                                                                                                                                                                    \n" + Colors.RESET);
         System.out.print("\t=> ");
         option = sc.nextInt();
