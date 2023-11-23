@@ -7,7 +7,7 @@ public abstract class Boat {
     int lifeCPUBoard;
     String symbol;
 
-    public Boat(String name, int size,  String symbol) {
+    public Boat(String name, int size, String symbol) {
         this.name = name;
         this.size = size;
         this.symbol = symbol;
@@ -38,6 +38,7 @@ public abstract class Boat {
     public void setSymbol(String symbol) {
         this.symbol = symbol;
     }
+
 
     public int getLifePlayerBoard() {
         return lifePlayerBoard;
