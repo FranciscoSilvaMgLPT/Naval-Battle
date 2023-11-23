@@ -4,21 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/src/DolbySystem.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sound/aii.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sound/explosion.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sound/fatality.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sound/music.wav" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/src/Sound/splash.wav" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Boats/Boat.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Boats/Boat.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/CreativeMode.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/CreativeMode.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/NavalBattle.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/NavalBattle.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PvC.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PvC.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/PvP.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/PvP.java" afterDir="false" />
-    </list>
+    <list default="true" id="be3c3c5a-3dab-49d8-882b-8f4323c415bd" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -54,7 +40,7 @@
     "RunOnceActivity.OpenProjectViewOnStart": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
     "git-widget-placeholder": "main",
-    "last_opened_file_path": "/Users/mindera/Documents/School/others/Naval-Battle"
+    "last_opened_file_path": "/Users/mindera/Documents/School/Naval-Battle"
   }
 }]]></component>
   <component name="RunManager">
