@@ -35,7 +35,7 @@ public class NavalBattle {
         System.out.println(" !" + Colors.RESET);
         Thread.sleep(1000);
 
-        //Logo.logoCinematic();
+        Logo.logoCinematic();
         menu();
     }
 
